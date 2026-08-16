@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#12304D">
+<title>Roteiro Brasil 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header><div class="hw">
+ <div class="topo">
+  <div class="marca">Roteiro Brasil <span>2026 · Rafael e mãe</span></div>
+  <button class="pbt" onclick="abre()"><svg class="i" viewBox="0 0 24 24"><path d="M12 3.5 21.5 20H2.5z"/><path d="M12 9.5v4.5M12 17h.01"/></svg> Pendências <span id="np"></span></button>
+ </div>
+ <div class="datas" id="datas"></div>
+</div></header>
+
+<div class="palco"><div class="tela" id="tela"></div></div>
+
+<nav><div class="nw">
+ <button id="ant" onclick="mv(-1)"><svg class="i" viewBox="0 0 24 24"><path d="M15 5 8 12l7 7"/></svg> Anterior</button>
+ <div class="meio" id="pos"></div>
+ <button id="prox" onclick="mv(1)">Próximo <svg class="i" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg></button>
+</div></nav>
+
+<div class="modal" id="mod" onclick="if(event.target===this)fecha()">
+ <div class="painel"><div class="pw">
+  <div class="ptopo"><h2>Pendências</h2><button class="fechar" onclick="fecha()">Fechar</button></div>
+  <div id="cpend"></div>
+ </div></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
