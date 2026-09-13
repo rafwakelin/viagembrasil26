@@ -1220,20 +1220,21 @@
      "k": "jantar",
      "g": "1h",
      "t": "Almoço perto do hotel",
-     "x": "Largo do Arouche e arredores têm mesa boa e barata a 5 min a pé."
+     "x": "O centro tem mesa boa e barata a poucos minutos a pé do Sooz."
     },
     {
-     "mv": "10 min|Uber|República → Consolação|14:50"
+     "mv": "12 min|Uber|República → Avenida Paulista|14:50"
     },
     {
      "h": "15:00",
      "k": "passeio",
      "g": "2h30",
-     "t": "Rua Frei Caneca",
-     "x": "A rua gay de São Paulo, entre a Paulista e a Consolação. Shopping Frei Caneca, cafés e lojas. De tarde é tranquila, boa para andar sem pressa."
+     "t": "Avenida Paulista e Parque Trianon",
+     "x": "Calçadão largo, plano e sombreado no trecho do parque. Boa caminhada de fim de tarde sem subida.",
+     "av": "O MASP fecha às segundas. A caminhada vale do mesmo jeito."
     },
     {
-     "mv": "10 min|Uber|Frei Caneca → Sooz|17:50"
+     "mv": "12 min|Uber|Paulista → Sooz|17:50"
     },
     {
      "h": "18:00",
@@ -1243,24 +1244,10 @@
      "x": "Você acordou às 05:00. Uma hora de sono aqui muda a noite."
     },
     {
-     "mv": "5 min|A pé|Sooz → Largo do Arouche|19:55"
-    },
-    {
      "h": "20:00",
      "k": "jantar",
-     "t": "Estrela do Arouche ou Virado-sp",
-     "x": "Largo do Arouche 82 e 150. Os dois abrem segunda, são casuais e ficam a cinco minutos do hotel."
-    },
-    {
-     "mv": "8 min|A pé|Largo do Arouche → Rua Bento Freitas|21:52"
-    },
-    {
-     "h": "22:00",
-     "k": "livre",
-     "g": "Noite",
-     "t": "Dedalos Bar",
-     "x": "Rua Bento Freitas 38, República. Aberto 24 horas, todos os dias. Levam documento com foto na porta.",
-     "av": "O Wild Thermas, na Rua Dr. Veiga Filho 802 em Higienópolis, fecha às 23:00 na segunda. 10 min de Uber, só vale se você sair cedo."
+     "t": "Jantar perto do hotel",
+     "x": "Escolha no dia, a pé. O centro tem opção aberta na segunda a cinco minutos do Sooz."
     }
    ]
   },
@@ -1311,7 +1298,7 @@
      "g": "Antes de sair",
      "t": "Malas prontas",
      "x": "Deixe tudo fechado agora. Você volta ao hotel só para pegar e sair.",
-     "av": "Se quiser sair à noite antes do voo, o Dedalos abre 24h e fica a 8 min a pé do hotel. Dá para ir às 20:00 e ainda sair às 22:30."
+     "av": "O quarto é seu até o embarque, então a tarde pode terminar cedo sem problema."
     },
     {
      "h": "19:30",

@@ -2,165 +2,556 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#12191f">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#101419">
 <title>Roteiro Brasil 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --ink:#12191f; --paper:#fff; --soft:#f4f6f8; --mut:#68747f; --rule:#e3e8ec;
-  --voo:#2d6cdf; --onibus:#6d4bc4; --hotel:#0d8a68; --passeio:#c07000;
-  --jantar:#c03a50; --livre:#7b8896; --via:#9aa6b0; --festa:#b13a8e;
+  --bg:#eef1f4;            --bg:oklch(95.5% .006 250);
+  --surf:#ffffff;          --surf:oklch(100% 0 0);
+  --surf2:#f5f7f9;         --surf2:oklch(97.6% .004 250);
+  --ink:#101419;           --ink:oklch(21% .015 255);
+  --ink2:#3b4552;          --ink2:oklch(41% .018 255);
+  --mut:#6d7885;           --mut:oklch(58% .016 255);
+  --line:#e0e5ea;          --line:oklch(91% .007 255);
+  --line2:#cdd5dc;         --line2:oklch(85% .011 255);
+  --h-voo:255; --h-onibus:300; --h-hotel:165; --h-passeio:70;
+  --h-jantar:20; --h-livre:250; --h-via:250; --h-festa:330;
+  --ft:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
+  --fm:'Roboto Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --col:64px; --mk:34px; --gap:16px; --esc:1;
+  --r:14px;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0d1116;   --bg:oklch(17% .012 255);
+    --surf:#141a21; --surf:oklch(21.5% .014 255);
+    --surf2:#1a212a;--surf2:oklch(25% .015 255);
+    --ink:#e9eef3;  --ink:oklch(94% .008 255);
+    --ink2:#b7c2ce; --ink2:oklch(81% .014 255);
+    --mut:#8593a1;  --mut:oklch(65% .018 255);
+    --line:#232c36; --line:oklch(29% .016 255);
+    --line2:#313d49;--line2:oklch(36% .018 255);
+  }
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0}
-body{
-  background:var(--paper); color:var(--ink);
-  font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  -webkit-font-smoothing:antialiased;
+.grao{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.5;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E")}
+@media (prefers-color-scheme:dark){.grao{mix-blend-mode:screen;opacity:.22}}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:400 16px/1.55 var(--ft);-webkit-font-smoothing:antialiased;text-wrap:pretty}
+svg{display:block}
+h1,h2,h3{text-wrap:balance}
+
+/* cabeçalho */
+.topo{position:sticky;top:0;z-index:50;background:color-mix(in oklab,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(14px);border-bottom:1px solid var(--line)}
+.topo .in{max-width:1180px;margin:0 auto;padding:13px 22px;display:flex;gap:18px;align-items:center}
+.marca{display:flex;align-items:center;gap:12px;min-width:0}
+.marca .anel{flex:0 0 auto}
+.marca h1{margin:0;font-size:16.5px;font-weight:600;letter-spacing:-.02em;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.marca p{margin:1px 0 0;font-size:12.5px;color:var(--mut);white-space:nowrap}
+.cmd{margin-left:auto;display:flex;align-items:center;gap:9px;cursor:pointer;background:var(--surf);
+  border:1px solid var(--line);border-radius:10px;padding:8px 11px;color:var(--mut);font:400 13.5px var(--ft)}
+.cmd:hover{border-color:var(--line2);color:var(--ink2)}
+.cmd kbd{font:500 11px var(--fm);border:1px solid var(--line);border-radius:5px;padding:2px 5px;color:var(--mut)}
+@media(max-width:640px){.cmd span{display:none}.marca p{display:none}}
+
+/* herói */
+.heroi{position:relative;overflow:hidden;background:oklch(19% .03 255);color:#fff;isolation:isolate}
+.heroi .malha{position:absolute;inset:-30%;z-index:-1;filter:blur(48px);opacity:.85;
+  background:
+   radial-gradient(38% 42% at 18% 32%,oklch(52% .17 255/.85),transparent 62%),
+   radial-gradient(36% 40% at 76% 24%,oklch(50% .15 190/.75),transparent 64%),
+   radial-gradient(44% 46% at 58% 82%,oklch(46% .16 300/.7),transparent 66%),
+   radial-gradient(30% 34% at 92% 70%,oklch(58% .16 60/.55),transparent 62%);
+  animation:deriva 34s ease-in-out infinite alternate}
+@keyframes deriva{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(-3%,2%,0) scale(1.08)}
+  100%{transform:translate3d(3%,-2%,0) scale(1.03)}}
+.heroi .in{max-width:1180px;margin:0 auto;padding:52px 22px 26px;position:relative}
+.heroi .et{display:inline-flex;align-items:center;gap:9px;font:500 11.5px var(--ft);letter-spacing:.09em;
+  color:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:6px 13px}
+.heroi .et i{width:6px;height:6px;border-radius:50%;background:oklch(72% .17 150);
+  box-shadow:0 0 0 0 oklch(72% .17 150/.7);animation:pulso 2.6s ease-out infinite}
+@keyframes pulso{70%{box-shadow:0 0 0 9px oklch(72% .17 150/0)}100%{box-shadow:0 0 0 0 oklch(72% .17 150/0)}}
+.heroi h1{margin:18px 0 0;font-size:clamp(38px,8.4vw,82px);font-weight:700;letter-spacing:-.05em;line-height:.94}
+.heroi h1 span{display:block;color:transparent;background:linear-gradient(92deg,#fff 12%,oklch(83% .1 210) 58%,oklch(78% .12 60));
+  -webkit-background-clip:text;background-clip:text}
+.heroi .sob{margin:16px 0 0;max-width:44ch;font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.74)}
+.heroi .nums{display:flex;flex-wrap:wrap;gap:30px;margin:28px 0 6px}
+.heroi .nums div b{display:block;font-size:27px;font-weight:600;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+.heroi .nums div span{font-size:12px;color:rgba(255,255,255,.6);letter-spacing:.02em}
+
+/* mapa da rota */
+.mapa{position:relative;max-width:1180px;margin:0 auto;padding:6px 22px 20px;overflow-x:auto;scrollbar-width:none}
+.mapa::-webkit-scrollbar{display:none}
+.mapa svg{min-width:940px;width:100%;height:120px;overflow:visible}
+.mapa .fio{fill:none;stroke:rgba(255,255,255,.26);stroke-width:1.5;stroke-linecap:round}
+.mapa .fio.feito{stroke:#fff;stroke-width:2;stroke-dasharray:var(--L);stroke-dashoffset:var(--L);
+  animation:tracar 1.5s cubic-bezier(.6,0,.2,1) .25s forwards}
+@keyframes tracar{to{stroke-dashoffset:0}}
+.mapa .no{cursor:pointer}
+.mapa .no circle{fill:oklch(19% .03 255);stroke:rgba(255,255,255,.45);stroke-width:1.5;transition:r .18s,stroke .18s}
+.mapa .no:hover circle{stroke:#fff;r:7}
+.mapa .no.at circle{fill:#fff;stroke:#fff;r:7.5}
+.mapa .no.hoje circle{stroke:oklch(72% .17 150);stroke-width:2.5}
+.mapa .no text{font:500 10.5px var(--fm);fill:rgba(255,255,255,.62);text-anchor:middle}
+.mapa .no.at text{fill:#fff;font-weight:600}
+.mapa .cid{font:600 11px var(--ft);fill:rgba(255,255,255,.5);letter-spacing:.05em}
+.mapa .cid.at{fill:#fff}
+
+/* trilho de dias */
+.trilho{max-width:1180px;margin:0 auto;padding:0 22px}
+.rol{display:flex;gap:7px;overflow-x:auto;scroll-snap-type:x proximity;padding:14px 0 15px;scrollbar-width:none}
+.rol::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;scroll-snap-align:center;cursor:pointer;background:var(--surf);border:1px solid var(--line);
+  border-radius:11px;padding:8px 11px 9px;font:inherit;color:var(--ink);text-align:left;min-width:74px;
+  transition:border-color .16s,transform .16s}
+.chip:hover{border-color:var(--line2);transform:translateY(-1px)}
+.chip b{display:block;font:600 14px/1.1 var(--ft);font-variant-numeric:tabular-nums}
+.chip i{display:block;font-style:normal;font-size:11px;color:var(--mut);margin-top:3px}
+.chip u{display:block;height:3px;border-radius:2px;margin-top:7px;background:var(--rc);opacity:.5;text-decoration:none}
+.chip[aria-current="true"]{background:var(--ink);border-color:var(--ink);color:var(--surf)}
+.chip[aria-current="true"] i{color:color-mix(in oklab,var(--surf) 62%,transparent)}
+.chip[aria-current="true"] u{opacity:1}
+.chip.hoje b:after{content:"hoje";font:500 9.5px var(--ft);letter-spacing:.04em;margin-left:6px;
+  color:var(--rc);vertical-align:1px}
+
+/* folha */
+.palco{max-width:1180px;margin:0 auto;padding:4px 22px 40px}
+.folha{container-type:inline-size;background:var(--surf);border:1px solid var(--line);border-radius:var(--r);
+  overflow:hidden;view-transition-name:folha}
+.capa{position:relative;overflow:hidden;padding:30px 26px 26px;color:#fff;isolation:isolate;
+  background:linear-gradient(140deg,oklch(40% .1 var(--rh)),oklch(26% .07 calc(var(--rh) + 26)))}
+.capa:before{content:"";position:absolute;inset:-40% -10%;z-index:-1;filter:blur(42px);opacity:.75;
+  background:radial-gradient(42% 52% at 22% 26%,oklch(62% .17 var(--rh)/.75),transparent 64%),
+             radial-gradient(38% 48% at 82% 74%,oklch(54% .16 calc(var(--rh) + 60)/.6),transparent 66%);
+  transform:translateY(var(--par,0px))}
+.capa:after{content:attr(data-n);position:absolute;right:-14px;bottom:-46px;z-index:-1;
+  font:700 168px/.72 var(--ft);letter-spacing:-.06em;color:rgba(255,255,255,.085);font-variant-numeric:tabular-nums}
+.capa .l1{display:flex;gap:18px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.capa .dt{display:flex;align-items:baseline;gap:12px}
+.capa .dt b{font-size:clamp(38px,7vw,52px);font-weight:700;letter-spacing:-.05em;line-height:.82;
+  font-variant-numeric:tabular-nums}
+.capa .dt i{font-style:normal;font:500 13px var(--fm);color:rgba(255,255,255,.72);letter-spacing:.02em}
+.capa .tag{font:500 11.5px var(--ft);letter-spacing:.03em;color:rgba(255,255,255,.86);
+  border:1px solid rgba(255,255,255,.26);border-radius:20px;padding:5px 11px}
+.capa h2{margin:16px 0 0;font-size:clamp(20px,3.4cqi + 14px,27px);font-weight:600;letter-spacing:-.028em;line-height:1.15}
+.capa p{margin:6px 0 0;font-size:14.5px;color:rgba(255,255,255,.72)}
+.medidas{display:flex;gap:0;border-top:1px solid var(--line);background:var(--surf2)}
+.medidas div{flex:1;padding:11px 16px;border-right:1px solid var(--line)}
+.medidas div:last-child{border-right:0}
+.medidas b{display:block;font:600 17px/1.2 var(--ft);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.medidas div{transition:background .2s}.medidas div:hover{background:var(--surf)}
+.medidas span{font-size:11.5px;color:var(--mut)}
+
+/* linha do tempo proporcional */
+.tl{padding:10px 26px 26px;position:relative}
+.tl:before{content:"";position:absolute;top:26px;bottom:30px;width:1px;background:var(--line2);
+  left:calc(26px + var(--col) + var(--gap) + var(--mk)/2)}
+.linha{display:grid;grid-template-columns:var(--col) var(--mk) minmax(0,1fr);gap:var(--gap);align-items:start}
+.hh{text-align:right;font:500 13.5px/1 var(--fm);letter-spacing:-.02em;padding-top:9px;color:var(--ink2);
+  font-variant-numeric:tabular-nums}
+.mk{width:var(--mk);height:var(--mk);border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:oklch(95% .04 var(--h));border:1px solid oklch(88% .06 var(--h))}
+.mk svg{width:16px;height:16px;stroke:oklch(48% .12 var(--h));fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media (prefers-color-scheme:dark){
+  .mk{background:oklch(30% .05 var(--h));border-color:oklch(38% .06 var(--h))}
+  .mk svg{stroke:oklch(78% .11 var(--h))}
 }
-.wrap{max-width:720px;margin:0 auto;padding:0 18px 64px}
-header.top{padding:26px 0 14px}
-h1{font-size:23px;line-height:1.2;letter-spacing:-.02em;margin:0 0 4px;font-weight:650}
-.sub{color:var(--mut);font-size:14px}
-nav.dias{
-  position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);
-  backdrop-filter:saturate(180%) blur(8px);
-  border-bottom:1px solid var(--rule);margin:0 -18px;padding:9px 18px;
-  display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;
+.par{padding:6px 0 8px}
+.par .cx{position:relative;background:var(--surf);border:1px solid var(--line);
+  border-left:3px solid oklch(55% .13 var(--h));border-radius:0 12px 12px 0;padding:14px 17px;min-height:var(--alt);
+  transition:border-color .2s,box-shadow .2s,transform .2s}
+.par .cx:hover{border-color:oklch(72% .08 var(--h));box-shadow:0 6px 22px oklch(55% .13 var(--h)/.12);transform:translateX(2px)}
+.linha{opacity:0;transform:translateY(10px)}
+.linha.vis{opacity:1;transform:none;transition:opacity .5s cubic-bezier(.2,.7,.3,1),transform .5s cubic-bezier(.2,.7,.3,1)}
+@media (prefers-reduced-motion:reduce){.linha{opacity:1;transform:none}}
+.par .rot{font:600 11.5px var(--ft);letter-spacing:.04em;color:oklch(45% .12 var(--h))}
+@media (prefers-color-scheme:dark){.par .rot{color:oklch(76% .1 var(--h))}}
+.par h3{margin:6px 0 5px;font-size:18px;font-weight:600;letter-spacing:-.018em;line-height:1.25}
+.par p{margin:0;font-size:14.8px;line-height:1.55;color:var(--ink2)}
+.cod{display:inline-flex;align-items:center;gap:10px;margin-top:12px;border:1px solid var(--line);
+  background:var(--surf2);border-radius:9px;padding:7px 11px;font:500 13px var(--fm);letter-spacing:-.02em}
+.cod b{font:600 10.5px var(--ft);letter-spacing:.06em;color:var(--mut)}
+.av{display:flex;gap:10px;margin-top:12px;font-size:14px;line-height:1.5;
+  color:oklch(38% .07 75);background:oklch(96% .04 85);border-left:3px solid oklch(72% .12 80);padding:10px 13px}
+@media (prefers-color-scheme:dark){.av{color:oklch(88% .05 85);background:oklch(28% .04 80)}}
+.av svg{flex:0 0 auto;width:16px;height:16px;stroke:oklch(60% .11 70);fill:none;stroke-width:1.8;stroke-linecap:round;margin-top:1px}
+.via{color:var(--mut);font-size:13.4px;padding:5px 0 6px;min-height:var(--alt);display:flex;align-items:center}
+.via .mk{background:none;border:0}
+.via .mk svg{stroke:var(--mut);width:15px;height:15px}
+.via b{font-weight:600;color:var(--ink2)}
+.vao{grid-column:1/-1;display:flex;align-items:center;gap:12px;height:var(--alt);
+  padding-left:calc(var(--col) + var(--gap) + var(--mk) + 4px);color:var(--mut);font-size:12px}
+.vao:before{content:"";flex:0 0 18px;height:1px;background:var(--line2)}
+.vao.corte:before{background:repeating-linear-gradient(90deg,var(--line2) 0 3px,transparent 3px 6px)}
+
+/* passos */
+.passos{display:flex;gap:11px;margin-top:16px}
+.passos button{flex:1;display:flex;align-items:center;gap:13px;cursor:pointer;background:var(--surf);
+  border:1px solid var(--line);border-radius:13px;padding:13px 16px;font:inherit;color:var(--ink);text-align:left;
+  transition:border-color .16s,transform .16s}
+.passos button:hover:not(:disabled){border-color:var(--line2);transform:translateY(-1px)}
+.passos button:disabled{opacity:.28;cursor:default}
+.passos .fim{justify-content:flex-end;text-align:right}
+.passos svg{flex:0 0 auto;width:17px;height:17px;stroke:var(--mut);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.passos b{display:block;font:600 11px var(--ft);letter-spacing:.05em;color:var(--mut);margin-bottom:4px}
+.passos em{font-style:normal;font-size:14.5px;font-weight:600;letter-spacing:-.015em}
+
+/* paleta de comandos */
+.overlay{position:fixed;inset:0;z-index:100;background:color-mix(in oklab,var(--ink) 42%,transparent);
+  display:none;align-items:flex-start;justify-content:center;padding:14vh 18px 18px;backdrop-filter:blur(3px)}
+.overlay.on{display:flex}
+.pal{width:min(640px,100%);background:var(--surf);border:1px solid var(--line2);border-radius:15px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.28)}
+.pal input{width:100%;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);
+  padding:16px 18px;font:400 16px var(--ft)}
+.pal input:focus{outline:none}
+.pal .saida{max-height:52vh;overflow:auto;padding:6px}
+.pal .it{display:flex;gap:13px;align-items:center;width:100%;text-align:left;background:none;border:0;cursor:pointer;
+  border-radius:9px;padding:10px 12px;font:inherit;color:var(--ink)}
+.pal .it[data-sel="1"]{background:var(--surf2)}
+.pal .it .d{font:500 12px var(--fm);color:var(--mut);flex:0 0 46px}
+.pal .it b{font-size:14.5px;font-weight:500}
+.pal .it small{display:block;color:var(--mut);font-size:12.5px}
+.pal .rod{border-top:1px solid var(--line);padding:9px 14px;color:var(--mut);font-size:11.5px;display:flex;gap:14px}
+.pal .vazio{padding:20px;color:var(--mut);font-size:14px;text-align:center}
+
+.rodape{max-width:1180px;margin:0 auto;padding:0 22px 44px;color:var(--mut);font-size:12.5px;
+  display:flex;gap:13px;flex-wrap:wrap;align-items:center}
+.rodape button{cursor:pointer;background:var(--surf);border:1px solid var(--line);border-radius:9px;
+  padding:7px 12px;font:500 12.5px var(--ft);color:var(--ink2)}
+:focus-visible{outline:2px solid oklch(60% .14 255);outline-offset:2px}
+
+@container (max-width:560px){
+  :root{--col:52px;--mk:30px;--gap:11px}
+  .tl{padding:8px 16px 20px}
+  .tl:before{left:calc(16px + var(--col) + var(--gap) + var(--mk)/2)}
+  .capa{padding:18px}
+  .medidas{flex-wrap:wrap}
 }
-nav.dias::-webkit-scrollbar{display:none}
-nav.dias button{
-  flex:0 0 auto;font:600 13px/1 inherit;color:var(--mut);background:var(--soft);
-  border:1px solid transparent;border-radius:999px;padding:8px 11px;cursor:pointer;
-  font-variant-numeric:tabular-nums;
-}
-nav.dias button[aria-current="true"]{background:var(--ink);color:#fff}
-nav.dias button:focus-visible{outline:2px solid var(--voo);outline-offset:2px}
-.cabdia{display:flex;gap:14px;align-items:baseline;padding:24px 0 6px;border-bottom:1px solid var(--rule)}
-.num{font-size:40px;font-weight:680;letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1}
-.num i{font-style:normal;font-size:15px;font-weight:600;color:var(--mut);margin-left:5px}
-.cabtxt{flex:1}
-.cidade{display:block;font-weight:620;font-size:16px}
-.resumo{display:block;color:var(--mut);font-size:14px}
-.item{display:flex;gap:13px;padding:17px 0;border-bottom:1px solid var(--rule)}
-.hora{flex:0 0 52px;font-variant-numeric:tabular-nums;font-weight:620;font-size:14px;padding-top:1px}
-.corpo{flex:1;min-width:0}
-.tag{
-  display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;
-  padding:2px 7px;border-radius:4px;color:#fff;margin-bottom:5px;
-}
-.t{font-weight:620;font-size:16px;margin:0 0 3px}
-.x{color:#39434c;font-size:14.5px;margin:0}
-.cod{
-  display:inline-block;margin-top:8px;font-variant-numeric:tabular-nums;font-size:13px;
-  background:var(--soft);border:1px solid var(--rule);border-radius:6px;padding:5px 9px;
-}
-.cod b{font-weight:600;color:var(--mut);margin-right:6px}
-.av{
-  margin-top:9px;font-size:13.5px;color:#5b4a20;background:#fdf6e3;
-  border-left:3px solid #e0b53f;border-radius:0 5px 5px 0;padding:8px 11px;
-}
-.via{color:var(--mut);font-size:13.5px;display:flex;gap:13px;padding:9px 0;border-bottom:1px dashed var(--rule)}
-.via .hora{color:var(--mut);font-weight:600}
-.via b{font-weight:600;color:#4b5560}
-.pend{margin:30px 0 10px}
-.pend h2{font-size:15px;font-weight:650;margin:0 0 10px}
-.p{border:1px solid var(--rule);border-left:3px solid var(--jantar);border-radius:0 8px 8px 0;padding:11px 13px;margin-bottom:8px}
-.p.feito{border-left-color:var(--hotel);opacity:.62}
-.p .q{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--mut);text-transform:uppercase}
-.p .r{font-weight:620;font-size:15px;margin:2px 0 3px}
-.p .s{font-size:14px;color:#39434c}
-footer{color:var(--mut);font-size:12.5px;padding-top:22px}
+@media(max-width:560px){.palco{padding:2px 14px 34px}.trilho{padding:0 14px}.topo .in{padding:11px 14px}}
+
 @media print{
-  nav.dias{display:none}
-  .dia{display:block !important;page-break-after:always}
-  body{font-size:11pt}
+  .topo,.trilho,.passos,.rodape,.overlay{display:none}
+  body{background:#fff}
+  .palco{padding:0;max-width:none}
+  .folha{page-break-after:always;border:0;border-radius:0;margin-bottom:0}
+  .capa{color:#000;background:none;border-bottom:2px solid #000}
+  .capa .dt i,.capa p{color:#444}
 }
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto}}
+::view-transition-old(folha),::view-transition-new(folha){animation-duration:.22s}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header class="top">
-  <h1>Roteiro Brasil 2026</h1>
-  <div class="sub">Rafael e mãe · 11 de novembro a 3 de dezembro · 23 dias</div>
-</header>
-<nav class="dias" id="nav" aria-label="Dias da viagem"></nav>
-<main id="tela"></main>
-<section class="pend" id="pend"></section>
-<footer>Toda a informação fica neste arquivo. Funciona sem internet.</footer>
+<div class="grao" aria-hidden="true"></div>
+
+<section class="heroi">
+  <div class="malha" aria-hidden="true"></div>
+  <div class="in">
+    <span class="et"><i></i>partida em <b id="faltam" style="font-weight:600;margin-left:4px"></b></span>
+    <h1>Roteiro<span>Brasil 2026</span></h1>
+    <p class="sob">Vinte e três dias entre Dubai e o Brasil, com a sua mãe do dia 13 ao 29. Cada dia é uma linha do tempo em escala real: a altura de cada parada é o tempo que ela leva.</p>
+    <div class="nums" id="nums"></div>
+  </div>
+  <div class="mapa"><div id="rota"></div></div>
+</section>
+
+<header class="topo"><div class="in">
+  <div class="marca">
+    <span class="anel" id="anel"></span>
+    <span><h1>Roteiro Brasil 2026</h1><p id="sub">Rafael e mãe · 23 dias</p></span>
+  </div>
+  <button class="cmd" id="abrirPal" type="button">Buscar <span>hotel, passeio, código</span> <kbd>Ctrl K</kbd></button>
+</div></header>
+
+<nav class="trilho"><div class="rol" id="rol"></div></nav>
+<div class="palco">
+  <main id="tela"></main>
+  <nav class="passos" id="passos"></nav>
 </div>
+<p class="rodape"><span>Arquivo único, funciona sem internet.</span>
+  <button type="button" id="imp">Imprimir os 23 dias</button></p>
+
+<div class="overlay" id="ov"><div class="pal">
+  <input id="q" type="text" placeholder="Ir para um dia, hotel, passeio ou código" autocomplete="off">
+  <div class="saida" id="saida"></div>
+  <div class="rod"><span>↑↓ navegar</span><span>Enter abrir</span><span>Esc fechar</span></div>
+</div></div>
+
 <script>
-const DADOS = {"PEND": [{"n": "Outubro", "t": "Museu do Ipiranga · 01/12", "p": "Entrada por horário marcado. Monitorar a abertura do calendário em meados de outubro."}, {"n": "Outubro", "t": "Confirmar local e horário do ENADE · 29/11", "p": "O cartão de confirmação sai antes da prova. Cheque o endereço e o horário de fechamento dos portões, e avise a mãe onde encontrar você depois."}, {"n": "Agora", "t": "Código da reserva do Novotel Curitiba", "p": "O hotel mudou do Pestana para o Novotel, na Rua Doutor Pedrosa 288. Preencha o código nos dias 24 e 29 e avise a Serra Verde Express do novo endereço do apanhe da Litorina."}, {"n": "Agora", "t": "Chão Batido abre na segunda? · 23/11", "p": "O jantar do dia 23 é em Santo Antônio de Lisboa, depois do pôr do sol. Confirme por telefone que a casa abre segunda antes de contar com ela."}, {"n": "Novembro", "t": "Transfer Sooz → GRU · noite de 01/12", "p": "Voo 02:10. Sair do hotel 22:30, estar no aeroporto às 23:10."}, {"n": "Novembro", "t": "Reservar os jantares que enchem", "p": "El Señor Asador no sábado 21 e Chão Batido na segunda 23, em Florianópolis. Ibérico e Taco El Pancho em Curitiba. Graça Mineira em São Paulo. Por telefone ou WhatsApp, uma semana antes."}, {"n": "Feito", "t": "Seguro da mãe · dia na Argentina", "p": "Contratado só para a travessia de 18/11, que é onde ele é exigido. Cobertura doméstica fica por conta do convênio dela."}], "D": [{"d": "11", "m": "nov", "sem": "Qua", "c": "Dubai → Doha", "r": "Dois voos e uma espera longa em Doha", "i": [{"h": "11:00", "k": "voo", "g": "Oman Air · WY 604", "t": "Dubai → Muscat", "x": "Terminal 1. Chega 12:10. Executiva, assento 03A. 2 peças de bagagem.", "cod": "GCWJDN", "cl": "Localizador"}, {"mv": "2h40|Conexão|Sem sair do terminal de Muscat|12:10"}, {"h": "14:50", "k": "voo", "g": "Oman Air · WY 663", "t": "Muscat → Doha", "x": "Chega 15:30. Conexão de 2h40 em Muscat.", "cod": "GCWJDN", "cl": "Localizador"}, {"mv": "10 min|A pé|Portão de chegada → Lounge Al Mourjan|15:20"}, {"h": "15:30", "k": "livre", "g": "Cerca de 10h", "t": "Espera em Doha", "x": "Lounge Al Mourjan pelo acesso da executiva. Pergunte no balcão da Qatar sobre hotel de trânsito.", "av": "Brasileiro entra no Catar sem visto. Dá tempo de jantar na cidade se preferir sair."}]}, {"d": "12", "m": "nov", "sem": "Qui", "c": "Doha → São Paulo", "r": "Chegada, Mercadão e ônibus noturno para Lins", "i": [{"h": "01:35", "k": "voo", "g": "Qatar Airways · WY 6029", "t": "Doha → Guarulhos", "x": "Chega 10:40 no Terminal 3. Qsuite, assento 5K.", "cod": "9TNDDB", "cl": "Reserva Qatar"}, {"h": "11:30", "k": "via", "g": "Transfer · 50 min", "t": "GRU Terminal 3 → ibis, na República", "x": "Já reservado. Chegada por volta das 12:20. Deixe as malas no hotel antes de sair.", "cod": "424878405", "cl": "Booking"}, {"mv": "15 min|Uber|ibis → Mercadão|12:25"}, {"h": "12:40", "k": "passeio", "g": "2h", "t": "Mercado Municipal", "x": "Almoce lá: sanduíche de mortadela no mezanino, no Hocca Bar ou no Bar do Mané, e pastel de bacalhau no Hocca. Depois desça e ande pelos boxes de frutas, que dão prova.", "av": "Fecha às 18:00. Leve algum dinheiro, parte dos boxes ainda prefere espécie."}, {"mv": "15 min|Uber|Mercadão → ibis|14:45"}, {"h": "15:00", "k": "hotel", "g": "Check-in", "t": "ibis budget SP Centro São João", "x": "Av. São João 1140, Centro. Check-in até 23:30. Sem café da manhã.", "cod": "6443.654.205 · PIN 2219", "cl": "Reserva"}, {"h": "19:30", "k": "jantar", "t": "Restaurante do ibis budget", "x": "Jantar no próprio hotel antes de sair. Evita procurar lugar no centro à noite carregando mala."}, {"mv": "20 min|Uber|Hotel → Terminal Barra Funda|21:00"}, {"h": "22:15", "k": "onibus", "g": "Reunidas", "t": "Barra Funda → Lins", "x": "Leito cama, poltrona 55, plataforma 10. Chegue por volta das 21:20, com folga.", "cod": "010323567770", "cl": "Bilhete"}]}, {"d": "13", "m": "nov", "sem": "Sex", "c": "Lins", "r": "Chegada de madrugada e dia com a família", "i": [{"h": "05:30", "k": "via", "g": "Chegada", "t": "Rodoviária de Lins", "x": "Av. Tiradentes 2401. Sua mãe busca vocês no desembarque."}, {"mv": "15 min|Carro|Rodoviária de Lins → Parque Alto da Boa Vista|05:45"}, {"h": "06:00", "k": "livre", "t": "Casa da família", "x": "Vá direto para a casa da sua mãe. Banho, café e descanso antes de o dia começar."}, {"h": "—", "k": "livre", "g": "Dia inteiro", "t": "Família e cidade", "x": "Dia livre com os irmãos e as crianças. Sem nada marcado."}, {"mv": "10 min|Carro|Casa da família → Cristal Palace|14:50"}, {"h": "15:00", "k": "hotel", "g": "Check-in", "t": "Cristal Palace Hotel", "x": "Rua Luiz Gama 1771. 2 noites, café incluído. Deixe a mala e volte para a família.", "cod": "6314.563.781 · PIN 9867", "cl": "Reserva", "av": "Obra no prédio das 09:00 às 19:00. Como você passa o dia fora, só incomoda se voltar para descansar à tarde."}, {"h": "19:00", "k": "jantar", "t": "Em casa, com a mãe", "x": "Sem restaurante. Ela cozinha."}]}, {"d": "14", "m": "nov", "sem": "Sáb", "c": "Lins", "r": "Dia livre e a festa de 90 anos da vó Maria", "i": [{"h": "—", "k": "livre", "g": "Dia livre", "t": "Sem planos", "x": "Dia aberto com a família. A festa é só à noite."}, {"h": "19:30", "k": "festa", "g": "Compromisso do dia", "t": "Festa de 90 anos da vó Maria", "x": "O único compromisso da viagem com data que não se remarca. A festa tem buffet, então não há jantar marcado.", "av": "Leve a câmera carregada e cartão vazio. É o material mais valioso que você vai trazer da viagem."}]}, {"d": "15", "m": "nov", "sem": "Dom", "c": "Lins → Bauru → Foz", "r": "Manhã com a família e a conexão mais apertada da viagem", "i": [{"h": "08:00", "k": "hotel", "g": "Check-out", "t": "Cristal Palace", "x": "Check-out das 06:00 às 13:00. Saia cedo e deixe as malas na casa da família."}, {"mv": "10 min|Carro|Cristal Palace → Casa da família|08:05"}, {"h": "08:15", "k": "livre", "g": "Manhã e início da tarde", "t": "Livre com a família", "x": "Despedida sem pressa. Faça a refeição principal aqui, porque em Bauru sobra pouco mais de uma hora."}, {"mv": "10 min|Carro|Casa da família → Rodoviária de Lins|14:30"}, {"h": "15:05", "k": "onibus", "g": "Reunidas", "t": "Lins → Bauru", "x": "Executivo. Rafa poltrona 3, mãe poltrona 4. Chega 17:20. Chegue por volta das 14:40.", "cod": "Rafa 010332443574 · Mãe 010332443908", "cl": "Bilhetes"}, {"h": "17:20", "k": "livre", "g": "1h55 até o Garcia", "t": "Bauru", "x": "Sem tempo para sair da rodoviária. Coma algo ali mesmo e fique de olho na plataforma.", "av": "É a folga mais curta do roteiro. Se o Reunidas atrasar muito, o Garcia das 19:15 é o único do dia. Plano B: Hotel Saint Martin, a minutos da rodoviária."}, {"h": "19:15", "k": "onibus", "g": "Viação Garcia", "t": "Bauru → Foz do Iguaçu", "x": "Cabine cama. Rafa poltrona 79, mãe poltrona 80. Linha Ribeirão Preto–Foz do Iguaçu.", "cod": "Rafa 4378632 · Mãe 4378633", "cl": "Bilhetes", "av": "A plataforma não vem impressa no bilhete. Confirme no painel ao chegar em Bauru."}]}, {"d": "16", "m": "nov", "sem": "Seg", "c": "Foz do Iguaçu", "r": "Chegada de ônibus e Itaipu à tarde. Dia curto de propósito", "i": [{"h": "09:25", "k": "via", "g": "Chegada", "t": "Rodoviária de Foz", "x": "Desembarque, retirada das malas do bagageiro e táxi ou app. Conte uns 30 min até estar no carro."}, {"mv": "20 min|Uber|Rodoviária de Foz → Recanto Cataratas|09:55"}, {"h": "10:15", "k": "hotel", "g": "Guarda-volumes", "t": "Recanto Cataratas Thermas Resort", "x": "Av. Costa e Silva 3500. Check-in só às 15:00. Deixe as malas, use as piscinas termais e almoce ali antes de Itaipu.", "cod": "5712.155.290 · PIN 6847", "cl": "Reserva"}, {"mv": "25 min|Uber|Recanto Cataratas → Itaipu|14:05"}, {"h": "14:30", "k": "passeio", "t": "Itaipu Special Tour", "x": "Av. Tancredo Neves 6702. Visita às 15:00, chegue 30 min antes.", "cod": "LB28862517", "cl": "Ingresso", "av": "Nenhum tipo de bolsa é permitido, armário custa R$ 10. Calçado fechado sem salto. Documento com foto. Drones proibidos."}, {"mv": "20 min|Uber|Itaipu → Monjolo|19:40"}, {"h": "20:00", "k": "jantar", "g": "Jantar decidido", "t": "Baru Gastronomia", "x": "Av. Paraná 3515, Monjolo. Contemporânea, porções generosas. Aberto das 07:00 à meia-noite, todos os dias.", "cod": "+55 45 99112-5003", "cl": "Telefone"}]}, {"d": "17", "m": "nov", "sem": "Ter", "c": "Foz do Iguaçu", "r": "Manhã livre, Parque das Aves e o pôr do sol", "i": [{"h": "09:00", "k": "livre", "g": "Manhã livre", "t": "Descanso no Recanto", "x": "Termas, piscina e café sem pressa. O dia só começa de verdade às 13:00."}, {"mv": "20 min|Uber|Recanto Cataratas → Parque das Aves|12:40"}, {"h": "13:00", "k": "passeio", "g": "3h", "t": "Parque das Aves", "x": "Entrada válida das 08:30 às 16:30. Fica em frente ao Parque Nacional.", "cod": "LB28862797", "cl": "Ingresso"}, {"mv": "5 min|A pé|Parque das Aves → Centro de Visitantes|16:25"}, {"h": "16:30", "k": "passeio", "t": "Pôr do Sol nas Cataratas", "x": "Embarque no Centro de Visitantes às 17:00 ou 17:30. Desembarque no Espaço Naipi dá acesso aos elevadores da Garganta do Diabo sem trilha. Brinde com espumante incluso.", "cod": "LB30619681", "cl": "Ingresso", "av": "Retire a pulseira antes, na Sala de Turismo do Centro de Visitantes. Acontece com qualquer clima."}, {"mv": "20 min|Uber|Espaço Naipi → Recanto Cataratas|19:40"}, {"h": "20:00", "k": "jantar", "t": "No Recanto Cataratas", "x": "Sem sair de novo. Vocês voltam do pôr do sol já tarde e o restaurante do resort resolve."}]}, {"d": "18", "m": "nov", "sem": "Qua", "c": "Foz → Argentina", "r": "Lado argentino das cataratas. Dia de passaporte", "i": [{"h": "—", "k": "passeio", "g": "Dia inteiro", "t": "Cataratas Argentinas", "x": "Transporte compartilhado, ingresso e taxa de turismo inclusos. O almoço não está incluso: coma nos restaurantes do parque ou leve lanche, porque o dia inteiro é dentro dele.", "cod": "Venda 190815", "cl": "Reserva", "av": "Leve o passaporte e uma cópia do documento da mãe. O horário do apanhe é informado depois das 18:30 do dia anterior. Pós-venda +55 45 99134-1079."}, {"mv": "40 min|Van|Puerto Iguazú → Recanto Cataratas|17:50"}, {"h": "18:30", "k": "via", "g": "Volta", "t": "Chegada ao Recanto", "x": "Horário aproximado. Dia inteiro em pé, com travessia de fronteira nos dois sentidos."}, {"h": "20:00", "k": "jantar", "g": "Decidir no dia", "t": "No Recanto ou TropCalia", "x": "Se vocês voltarem da Argentina depois das 18:30, jantem no resort mesmo. Se chegarem cedo e com disposição, o TropCalia fica a 15 min e vai até 23:30.", "cod": "+55 45 99809-0120", "cl": "TropCalia"}]}, {"d": "19", "m": "nov", "sem": "Qui", "c": "Foz → Florianópolis", "r": "Amanhecer nas cataratas, termas e ônibus noturno", "i": [{"mv": "20 min|Uber|Recanto Cataratas → Parque Nacional|04:40"}, {"h": "05:00", "k": "passeio", "g": "Madrugada", "t": "Amanhecer nas Cataratas com café", "x": "Entrada no parque brasileiro antes da abertura ao público. Café no Porto Canoas.", "cod": "Venda 190815", "cl": "Reserva", "av": "De madrugada há pouco carro rodando. Peça o Uber com antecedência ou combine o táxi na recepção do Recanto na noite anterior."}, {"mv": "25 min|Uber|Parque Nacional → Recanto Cataratas|11:35"}, {"h": "12:00", "k": "hotel", "g": "Check-out", "t": "Recanto Cataratas", "x": "Deixe as malas na bagageira até a hora do ônibus."}, {"h": "14:00", "k": "livre", "g": "Tarde", "t": "Termas do Recanto", "x": "Lado brasileiro já visto no amanhecer e no pôr do sol. A tarde fica para as piscinas termais antes do ônibus."}, {"mv": "20 min|Uber|Recanto Cataratas → Rodoviária de Foz|17:20"}, {"h": "18:15", "k": "onibus", "g": "Catarinense", "t": "Foz → Florianópolis", "x": "Embarque das 18:15 às 18:44, saída 18:45. Leito cama, poltronas 61 e 62. Chegue por volta das 17:40.", "cod": "Rafa BPE 7012154 · Mãe BPE 7012153", "cl": "Bilhetes"}]}, {"d": "20", "m": "nov", "sem": "Sex", "c": "Florianópolis", "r": "Chegada, centro histórico e ponte no fim da tarde", "i": [{"h": "11:00", "k": "via", "g": "Chegada", "t": "Rodoviária de Florianópolis", "x": "Carro até o Novotel, cerca de 15 min."}, {"mv": "15 min|Uber|Rodoviária de Floripa → Novotel|11:15"}, {"h": "11:30", "k": "hotel", "g": "Guarda-volumes", "t": "Novotel Florianópolis", "x": "Av. Rubens Arruda Ramos 2034, Beira Mar Norte. Deixe as malas, o quarto sai às 15:00.", "cod": "6172.585.897 · PIN 3972", "cl": "Reserva", "av": "Peça early check-in no balcão. Se houver quarto livre, a rede Accor costuma liberar sem cobrar."}, {"mv": "10 min|Uber|Novotel → Mercado Público|11:50"}, {"h": "12:00", "k": "passeio", "g": "1h30", "t": "Mercado Público", "x": "Almoço ali mesmo, logo na chegada."}, {"mv": "3 min|A pé|Mercado Público → Praça XV|13:42"}, {"h": "13:45", "k": "passeio", "g": "1h", "t": "Praça XV e Catedral", "x": "A figueira centenária da praça e a catedral ficam lado a lado. Passeio curto e sombreado."}, {"mv": "20 min|A pé|Praça XV → mirante da ponte|14:40"}, {"h": "15:00", "k": "passeio", "g": "1h30", "t": "Ponte Hercílio Luz", "x": "Fica perto do centro, então aproveite que vocês já estão aqui em vez de voltar depois. O mirante do lado da ilha é o melhor ângulo.", "av": "Se alguém estiver cansado, pegue Uber. São 8 min da praça."}, {"mv": "10 min|Uber|Mirante da ponte → Novotel|16:50"}, {"h": "17:00", "k": "hotel", "g": "Check-in", "t": "Novotel Florianópolis", "x": "Quatro noites, 2 camas de solteiro, café incluído. Banho e descanso antes do jantar."}, {"mv": "10 min|Uber|Novotel → Praça Getúlio Vargas|19:50"}, {"h": "20:00", "k": "jantar", "g": "Jantar decidido", "t": "Los Troncos Parrilla", "x": "Praça Getúlio Vargas 158, Centro. Parrilla uruguaia, carne no ponto certo. Sexta até 23:00. Reserve, costuma lotar.", "cod": "+55 48 99205-3743", "cl": "Telefone"}]}, {"d": "21", "m": "nov", "sem": "Sáb", "c": "Florianópolis", "r": "Costa da Lagoa de barco, o vilarejo sem carros", "i": [{"mv": "25 min|Uber|Novotel → Lagoa da Conceição|09:00"}, {"h": "09:25", "k": "via", "g": "Embarque", "t": "Centrinho da Lagoa da Conceição", "x": "O embarque da Cooperbarco fica na Rua Sen. Ivo D'Aquino 2, na beira da lagoa.", "av": "A Cooperbarco só aceita pix, débito ou dinheiro. Cartão de crédito não passa."}, {"h": "09:45", "k": "passeio", "g": "Barco · 30 min", "t": "Travessia até a Costa da Lagoa", "x": "Barco da Cooperbarco atravessando a Lagoa da Conceição. Sente do lado esquerdo para a vista dos morros."}, {"h": "10:15", "k": "passeio", "g": "4h", "t": "Costa da Lagoa", "x": "Vilarejo sem carro nenhum, só trilha e casas na beira d'água. Caminhe pela margem, sente nos restaurantes sobre a água e almoce lá.", "av": "Terreno plano na beira, mas com degraus nos trapiches. Sapato fechado ajuda. Sábado o vilarejo inteiro funciona, que é a vantagem de ter trocado o dia."}, {"h": "14:30", "k": "passeio", "g": "Barco · 30 min", "t": "Volta para a Lagoa da Conceição", "x": "Confirme o horário do último barco na chegada. Eles rodam das 08:00 às 20:00, mas com intervalos."}, {"mv": "25 min|Uber|Lagoa da Conceição → Novotel|15:05"}, {"h": "15:30", "k": "livre", "g": "Tarde livre", "t": "Volta ao Novotel", "x": "Banho e descanso. O dia inteiro foi na água e o jantar é a cinco minutos a pé."}, {"mv": "5 min|A pé|Novotel → Rua Bocaiúva|19:25"}, {"h": "19:30", "k": "jantar", "g": "Jantar decidido", "t": "El Señor Asador de Brasa", "x": "Rua Bocaiúva 2098, Centro. Carnes na brasa, cordeiro e arroz de pato. Sábado até 23:20, a cinco minutos a pé do hotel.", "cod": "+55 48 3113-2088", "cl": "Telefone"}]}, {"d": "22", "m": "nov", "sem": "Dom", "c": "Florianópolis", "r": "Dia inteiro no norte da ilha, sem travessia", "i": [{"mv": "35 min|Uber|Novotel → Jurerê|09:30"}, {"h": "10:05", "k": "passeio", "g": "2h30", "t": "Praia de Jurerê", "x": "Mar calmo e areia plana, boa para caminhar a orla inteira. A parte tradicional, e não Jurerê Internacional, é mais tranquila num domingo."}, {"mv": "5 min|A pé|Orla → restaurantes da Av. dos Búzios|12:40"}, {"h": "12:45", "k": "jantar", "g": "1h30", "t": "Almoço em Jurerê", "x": "Faça a refeição principal aqui. Tem casa de carne e massa além dos frutos do mar."}, {"mv": "12 min|Uber|Jurerê → Praia Daniela|14:18"}, {"h": "14:30", "k": "passeio", "g": "2h", "t": "Praia Daniela", "x": "A 12 min dali, ainda mais calma e rasa. Boa para sentar à sombra no fim da tarde."}, {"mv": "35 min|Uber|Praia Daniela → Novotel|16:55"}, {"h": "17:30", "k": "livre", "g": "Volta", "t": "Novotel Florianópolis", "x": "Tarde livre. Amanhã é o dia mais longo da ilha, com pôr do sol em Santo Antônio e jantar por lá."}, {"mv": "8 min|Uber|Novotel → Centro|19:52"}, {"h": "20:00", "k": "jantar", "g": "Jantar decidido", "t": "Trattoria Carbone", "x": "Rua Felipe Schmidt 869, Centro. Costela invernale e risoto. Domingo até 23:00, quando quase tudo no centro fecha.", "cod": "+55 48 3054-0731", "cl": "Telefone"}]}, {"d": "23", "m": "nov", "sem": "Seg", "c": "Florianópolis", "r": "Praias do leste e pôr do sol açoriano", "i": [{"mv": "25 min|Uber|Novotel → Praia Mole|09:00"}, {"h": "09:25", "k": "passeio", "g": "2h", "t": "Praia Mole", "x": "Areia clara e morros dos dois lados. Mar forte, é praia de olhar mais do que de entrar.", "av": "Segunda de manhã é o horário mais vazio da semana nas praias do leste."}, {"mv": "10 min|Uber|Praia Mole → Praia da Joaquina|11:25"}, {"h": "11:35", "k": "passeio", "g": "1h15", "t": "Praia da Joaquina", "x": "A 10 min da Mole. Vale pelas dunas e pelo mirante da entrada, mesmo sem descer à areia."}, {"mv": "10 min|Uber|Joaquina → Lagoa da Conceição|12:50"}, {"h": "13:00", "k": "jantar", "g": "1h15", "t": "Almoço na Lagoa", "x": "Parada só para comer, no caminho de volta. As praias não têm boa estrutura de restaurante e a Lagoa fica a 10 min da Joaquina."}, {"mv": "25 min|Uber|Lagoa da Conceição → Novotel|14:15"}, {"h": "14:40", "k": "livre", "g": "2h", "t": "Descanso no Novotel", "x": "Duas horas deitado antes de sair para o pôr do sol. O dia termina tarde e o jantar é longe do hotel."}, {"mv": "25 min|Uber|Novotel → Santo Antônio de Lisboa|16:45"}, {"h": "17:10", "k": "passeio", "g": "2h15", "t": "Santo Antônio de Lisboa", "x": "Vilarejo açoriano com o melhor pôr do sol da ilha. O sol se põe às 18:50 em novembro."}, {"mv": "5 min|A pé|Centrinho de Santo Antônio → restaurante|19:25"}, {"h": "19:30", "k": "jantar", "g": "Jantar decidido", "t": "Restaurante Chão Batido", "x": "Rua Quinze de Novembro 103, Santo Antônio de Lisboa. Frutos do mar com vista da baía, no próprio vilarejo do pôr do sol.", "cod": "+55 48 3235-2186", "cl": "Telefone", "av": "Confirme por telefone se abre na segunda. Se estiver fechado, volte ao centro: a Trattoria Carbone e o Mercado Público ficam a 25 min de Uber daqui."}, {"mv": "25 min|Uber|Santo Antônio de Lisboa → Novotel|21:00"}, {"h": "21:25", "k": "livre", "t": "Última noite em Floripa", "x": "A mala se arruma amanhã de manhã, sem pressa. O check-out é ao meio-dia e o ônibus para Curitiba só sai às 12:45."}]}, {"d": "24", "m": "nov", "sem": "Ter", "c": "Florianópolis → Curitiba", "r": "Cinco horas de estrada, de dia, e chegada ao centro", "i": [{"h": "—", "k": "livre", "g": "Manhã", "t": "Manhã livre na Beira Mar", "x": "Café no hotel, uma última caminhada na orla e a mala fechada com calma. O check-out é só ao meio-dia."}, {"mv": "5 min|A pé|Novotel → restaurantes da orla|10:25"}, {"h": "10:30", "k": "jantar", "g": "1h", "t": "Almoço cedo na Beira Mar", "x": "Coma antes de embarcar. O ônibus sai 12:45 e vocês só chegam em Curitiba às 19:00."}, {"h": "12:00", "k": "hotel", "g": "Check-out", "t": "Novotel Florianópolis", "x": "Check-out no horário. A rodoviária fica a 15 min.", "cod": "6172.585.897 · PIN 3972", "cl": "Reserva"}, {"mv": "15 min|Uber|Novotel → Rodoviária de Florianópolis|12:15"}, {"h": "12:45", "k": "onibus", "g": "Penha", "t": "Florianópolis → Curitiba", "x": "Plataforma VIP Penha. Cama. Rafa poltrona 53, mãe poltrona 52. Chegada por volta das 19:00.", "cod": "Rafa 010335300370 · Mãe 010335300375", "cl": "Bilhetes", "av": "Viagem diurna, cinco horas pela BR-101, a única do roteiro com paisagem. Compre água e algo para comer na rodoviária antes de embarcar."}, {"mv": "12 min|Uber|Rodoferroviária → Novotel, no centro|19:15"}, {"h": "19:30", "k": "hotel", "g": "Check-in", "t": "Novotel Curitiba Batel", "x": "Rua Doutor Pedrosa 288, Centro. Cinco noites, café incluído. Apesar do nome, o hotel fica no centro, a quatro minutos a pé da Rua 24 Horas.", "cod": "a preencher", "cl": "Reserva", "av": "Ponha aqui o código da reserva do Novotel antes de viajar."}, {"mv": "12 min|Uber|Novotel → Rua Bpo. Dom José|20:18"}, {"h": "20:30", "k": "jantar", "g": "Jantar decidido", "t": "Taco El Pancho", "x": "Rua Bpo. Dom José 2293, Batel. Fajitas e tacos com música ao vivo. Terça até 01:00.", "cod": "+55 41 99759-6000", "cl": "Telefone", "av": "Costuma lotar. Reserve por telefone quando chegar em Curitiba."}]}, {"d": "25", "m": "nov", "sem": "Qua", "c": "Curitiba", "r": "Jardim Botânico de manhã, Niemeyer à tarde", "i": [{"h": "—", "k": "livre", "g": "Manhã", "t": "Café da manhã no Novotel", "x": "Café incluído. Saiam por volta das 09:15."}, {"mv": "12 min|Uber|Novotel → Jardim Botânico|09:18"}, {"h": "09:30", "k": "passeio", "g": "2h30", "t": "Jardim Botânico", "x": "Abre às 06:00. A estufa de vidro, o jardim francês e a trilha do bosque."}, {"mv": "12 min|Uber|Jardim Botânico → centro|12:18"}, {"h": "12:30", "k": "jantar", "g": "1h15", "t": "Almoço", "x": "Coma antes do museu."}, {"mv": "8 min|Uber|Almoço → Museu Oscar Niemeyer|13:52"}, {"h": "14:00", "k": "passeio", "g": "2h", "t": "Museu Oscar Niemeyer", "x": "O Olho e o anexo. Fecha às segundas, quarta é dia tranquilo."}, {"mv": "8 min|Uber|Museu Oscar Niemeyer → Novotel|16:22"}, {"h": "16:30", "k": "livre", "g": "Descanso", "t": "Volta ao Novotel", "x": "Banho e uma hora deitado antes do jantar."}, {"mv": "12 min|Uber|Novotel → Água Verde|19:18"}, {"h": "19:30", "k": "jantar", "g": "Jantar decidido", "t": "Restaurante Ibérico", "x": "Av. Água Verde 588. Bacalhau, paella e flamenco em algumas noites. Quarta até 23:00.", "cod": "+55 41 99980-1003", "cl": "Telefone"}]}, {"d": "26", "m": "nov", "sem": "Qui", "c": "Curitiba", "r": "Centro histórico de manhã, Expomotorhome à tarde", "i": [{"mv": "7 min|Uber|Novotel → Mercado Municipal|08:53"}, {"h": "09:00", "k": "passeio", "g": "1h30", "t": "Mercado Municipal de Curitiba", "x": "Abre às 07:00 e fecha segunda. Boxes de frios, café e o setor orgânico. Bom lugar para o café da manhã reforçado."}, {"mv": "8 min|A pé|Mercado Municipal → Rua XV|10:37"}, {"h": "10:45", "k": "passeio", "g": "1h30", "t": "Rua XV e Largo da Ordem", "x": "Calçadão, Boca Maldita e o casario do centro histórico. Tudo a pé, num raio de 15 min."}, {"h": "12:30", "k": "jantar", "g": "1h", "t": "Almoço no centro", "x": "Coma antes de subir para Pinhais. A feira não tem praça de alimentação garantida."}, {"mv": "30 min|Uber|Centro → Expotrade, em Pinhais|13:30"}, {"h": "14:00", "k": "passeio", "g": "6h · até 20:00", "t": "10ª Expomotorhome", "x": "Expotrade Convention Center, Pinhais.", "cod": "Pedido 3387368", "cl": "Ingresso", "av": "Ingresso pessoal e intransferível, documento com foto. Leve fita métrica, fotografe a placa de cada modelo junto com o interior e pergunte a carga útil com os tanques cheios. Saiam por volta das 20:00."}, {"mv": "30 min|Uber|Expotrade, Pinhais → centro|20:00"}, {"h": "20:30", "k": "jantar", "t": "No Novotel", "x": "Vocês voltam da feira tarde e cansados. Coma no hotel e durma.", "av": "Se chegarem antes das 20:00 e com fome de restaurante, o Babilônia fica a 10 min e serve até meia-noite: +55 41 3082-6009."}]}, {"d": "27", "m": "nov", "sem": "Sex", "c": "Curitiba → Morretes", "r": "Litorina Luxo pela Serra do Mar. O passeio do roteiro", "i": [{"h": "07:00", "k": "via", "g": "Apanhe", "t": "Transfer no hotel", "x": "A partir das 07:00. Se não houver apanhe, apresentar 07:30 no Bloco C.", "cod": "Reserva 189865", "cl": "Reserva", "av": "Avise a Serra Verde do novo endereço. O apanhe estava registrado no Pestana, no Batel, e agora é no Novotel, na Rua Doutor Pedrosa 288."}, {"h": "08:30", "k": "passeio", "g": "Serra Verde Express", "t": "Litorina Luxo Copacabana → Morretes", "x": "Vagão 19, poltronas 9 e 10. Almoço com barreado, Hisgeopar e tour em Antonina. Retorno de van às 17:30.", "cod": "88958485 · 88958566", "cl": "Vouchers"}, {"h": "19:30", "k": "jantar", "t": "Leve, no Novotel", "x": "O almoço da Litorina é barreado, prato pesado, e vocês voltam de van às 17:30 cansados. Algo simples no hotel resolve."}]}, {"d": "28", "m": "nov", "sem": "Sáb", "c": "Curitiba", "r": "Tanguá, Ópera de Arame e Barigui, tudo no mesmo arco", "i": [{"mv": "20 min|Uber|Novotel → Parque Tanguá|08:40"}, {"h": "09:00", "k": "passeio", "g": "1h30", "t": "Parque Tanguá", "x": "Mirante sobre a antiga pedreira, cascata e o túnel entre os dois lados. Sábado enche depois das 11:00, chegue cedo."}, {"mv": "15 min|A pé|Parque Tanguá → Ópera de Arame|10:30"}, {"h": "10:45", "k": "passeio", "g": "45 min", "t": "Ópera de Arame", "x": "Fica ao lado do Tanguá, dá para ir a pé em 15 min. Estrutura tubular sobre um lago, visita rápida."}, {"mv": "10 min|Uber|Ópera de Arame → Santa Felicidade|11:50"}, {"h": "12:00", "k": "jantar", "g": "1h30", "t": "Almoço em Santa Felicidade", "x": "Bairro italiano a 10 min da Ópera. Cantinas de rodízio de massa, prato típico de Curitiba."}, {"mv": "10 min|Uber|Santa Felicidade → Parque Barigui|14:20"}, {"h": "14:30", "k": "passeio", "g": "2h", "t": "Parque Barigui", "x": "Capivaras, lago e área de caminhada plana. O parque mais fácil para a mãe andar sem subida."}, {"mv": "15 min|Uber|Parque Barigui → Novotel|16:45"}, {"h": "17:00", "k": "livre", "g": "Descanso", "t": "Volta ao Novotel", "x": "Banho e pausa antes do último jantar com a sua mãe."}, {"mv": "12 min|Uber|Novotel → Água Verde|19:18"}, {"h": "19:30", "k": "jantar", "g": "Jantar decidido", "t": "Barolo Curitiba", "x": "Av. Silva Jardim 2487, Água Verde. Casa tradicional de Curitiba. Sábado das 19:00 à meia-noite. Porções grandes, feitas para dividir, então peça menos do que parece.", "cod": "+55 41 3243-3430", "cl": "Telefone", "av": "Último jantar com a sua mãe. Reserve com antecedência, sábado enche."}]}, {"d": "29", "m": "nov", "sem": "Dom", "c": "Curitiba · ENADE e separação", "r": "Prova à tarde, mãe no shopping, dois ônibus à noite", "i": [{"mv": "6 min|Uber|Novotel → Largo da Ordem|08:54"}, {"h": "09:00", "k": "passeio", "g": "1h30", "t": "Feira do Largo da Ordem", "x": "Só aos domingos, das 09:00 às 14:00. Vá com a mãe antes da prova, dá tempo folgado."}, {"mv": "6 min|Uber|Largo da Ordem → Novotel|10:24"}, {"h": "10:30", "k": "jantar", "g": "30 min", "t": "Almoço cedo, antes da prova", "x": "Coma leve. A prova é longa e você não vai poder sair para comer."}, {"h": "11:00", "k": "via", "g": "Rafa", "t": "Sair para o local do ENADE", "x": "Leve documento com foto e caneta preta.", "av": "Confirme o endereço e o horário de fechamento dos portões no cartão de confirmação. Portão fechado não abre."}, {"h": "11:00", "k": "hotel", "g": "Mãe", "t": "Check-out do Novotel", "x": "Check-out até 12:00. As duas malas ficam no guarda-volumes do hotel.", "cod": "a preencher", "cl": "Reserva"}, {"mv": "8 min|Uber|Novotel → Shopping Estação|11:52"}, {"h": "12:00", "k": "livre", "g": "Mãe · tarde", "t": "Shopping Estação", "x": "Av. Sete de Setembro 2775, a 8 min do hotel. Praça de alimentação, cinema e ar condicionado. Lugar seguro para passar a tarde e almoçar.", "av": "O ponto de espera mudou junto com o hotel. O Shopping Batel ficava ao lado do Pestana, e o Novotel está no centro."}, {"h": "17:30", "k": "via", "g": "Encontro", "t": "Shopping Estação", "x": "Combine um ponto fixo, não só o shopping. A praça de alimentação funciona bem.", "av": "Se a prova terminar depois das 18:00, mude o plano: a mãe pega as malas no Novotel e vai direto para a rodoferroviária, e você a encontra lá."}, {"mv": "8 min|Uber|Shopping Estação → Novotel|18:22"}, {"h": "18:30", "k": "hotel", "g": "Malas", "t": "Buscar as malas no Novotel", "x": "8 min de carro do shopping."}, {"mv": "12 min|Uber|Novotel → Rodoferroviária|19:00"}, {"h": "19:15", "k": "via", "g": "Chegada ao terminal", "t": "Rodoferroviária de Curitiba", "x": "Av. Presidente Affonso Camargo 330. Localize a plataforma 16 antes de qualquer outra coisa."}, {"h": "19:45", "k": "onibus", "g": "Satélite Norte · mãe", "t": "Curitiba → Lins", "x": "Plataforma 16, poltrona 47, leito cama. Linha Goiânia–Florianópolis.", "cod": "010021796905", "cl": "Bilhete", "av": "Combine com seus irmãos quem busca ela na rodoviária de Lins na manhã do dia 30."}, {"h": "20:00", "k": "livre", "g": "3h no terminal", "t": "Jantar e espera na rodoferroviária", "x": "A praça de alimentação fica no piso superior do Bloco Estadual e funciona 24 horas. Estação Rodo é a melhor da casa: prato feito com bife bem servido sai perto de R$ 40 com refrigerante. Express Dom Bolinha fica ao lado, serve o mesmo cardápio e tem café coado na hora por uns R$ 5. O salão tem mesas, sofás e tomadas para carregar o celular.", "av": "Peça o cardápio completo, não só o que estiver na mesa. Há relato de duas versões diferentes, uma com pratos mais caros. Guarda-volumes funciona 24h com pix e cartão. Caixas eletrônicos ficam perto do desembarque."}, {"h": "23:00", "k": "onibus", "g": "Penha · Rafa", "t": "Curitiba → São Paulo", "x": "Portão J, poltrona 35, cama individual. Chega ao Tietê por volta das 05:30. Esteja no portão às 22:40.", "cod": "010323536305", "cl": "Bilhete"}]}, {"d": "30", "m": "nov", "sem": "Seg", "c": "São Paulo", "r": "Manhã de sono, Pinacoteca e tarde livre", "i": [{"h": "05:30", "k": "via", "g": "Chegada", "t": "Rodoviária do Tietê", "x": "Com mala, prefira carro pelo app."}, {"mv": "20 min|Uber|Rodoviária do Tietê → Sooz, na República|05:55"}, {"h": "06:15", "k": "hotel", "g": "Entrada", "t": "Sooz Hotel Collection", "x": "Av. São Luís 234, República. Quarto reservado desde 29/11 para entrar de manhã. Durma até umas 10:00.", "cod": "6800.543.753 · PIN 1786", "cl": "Reserva"}, {"mv": "12 min|Uber|Sooz → Estação da Luz|11:18"}, {"h": "11:30", "k": "passeio", "g": "2h", "t": "Pinacoteca e Parque da Luz", "x": "A Pinacoteca fecha às terças, então hoje é o único dia possível.", "av": "Segunda o Museu do Ipiranga e o MASP estão fechados."}, {"mv": "12 min|Uber|Luz → República|13:33"}, {"h": "13:45", "k": "jantar", "g": "1h", "t": "Almoço perto do hotel", "x": "Largo do Arouche e arredores têm mesa boa e barata a 5 min a pé."}, {"mv": "10 min|Uber|República → Consolação|14:50"}, {"h": "15:00", "k": "passeio", "g": "2h30", "t": "Rua Frei Caneca", "x": "A rua gay de São Paulo, entre a Paulista e a Consolação. Shopping Frei Caneca, cafés e lojas. De tarde é tranquila, boa para andar sem pressa."}, {"mv": "10 min|Uber|Frei Caneca → Sooz|17:50"}, {"h": "18:00", "k": "livre", "g": "Descanso", "t": "Banho e pausa", "x": "Você acordou às 05:00. Uma hora de sono aqui muda a noite."}, {"mv": "5 min|A pé|Sooz → Largo do Arouche|19:55"}, {"h": "20:00", "k": "jantar", "t": "Estrela do Arouche ou Virado-sp", "x": "Largo do Arouche 82 e 150. Os dois abrem segunda, são casuais e ficam a cinco minutos do hotel."}, {"mv": "8 min|A pé|Largo do Arouche → Rua Bento Freitas|21:52"}, {"h": "22:00", "k": "livre", "g": "Noite", "t": "Dedalos Bar", "x": "Rua Bento Freitas 38, República. Aberto 24 horas, todos os dias. Levam documento com foto na porta.", "av": "O Wild Thermas, na Rua Dr. Veiga Filho 802 em Higienópolis, fecha às 23:00 na segunda. 10 min de Uber, só vale se você sair cedo."}]}, {"d": "01", "m": "dez", "sem": "Ter", "c": "São Paulo", "r": "Ipiranga, Ibirapuera e saída para o voo", "i": [{"mv": "25 min|Uber|Sooz → Museu do Ipiranga|08:35"}, {"h": "09:00", "k": "passeio", "g": "2h30", "t": "Museu do Ipiranga", "x": "Entrada por horário marcado. O jardim antes do prédio já vale a caminhada.", "av": "Ingresso ainda não comprado. Monitorar o calendário em meados de outubro."}, {"mv": "25 min|Uber|Ipiranga → Centro|12:05"}, {"h": "12:30", "k": "jantar", "g": "1h", "t": "Almoço", "x": "Coma bem. À noite você embarca e só janta no avião de madrugada."}, {"mv": "20 min|Uber|Almoço → Parque Ibirapuera|13:40"}, {"h": "14:00", "k": "passeio", "g": "2h", "t": "Parque Ibirapuera", "x": "Plano, sombreado e enorme. Entre pelo Portão 10, ande até a Marquise e o lago. Se der vontade de museu, o MAC USP fica ali com terraço aberto."}, {"mv": "20 min|Uber|Parque Ibirapuera → Sooz|16:40"}, {"h": "17:00", "k": "hotel", "g": "Antes de sair", "t": "Malas prontas", "x": "Deixe tudo fechado agora. Você volta ao hotel só para pegar e sair.", "av": "Se quiser sair à noite antes do voo, o Dedalos abre 24h e fica a 8 min a pé do hotel. Dá para ir às 20:00 e ainda sair às 22:30."}, {"h": "19:30", "k": "jantar", "t": "Jantar no hotel ou delivery", "x": "Refeição simples antes do aeroporto."}, {"h": "22:30", "k": "via", "g": "Transfer", "t": "Sooz → GRU", "x": "45 min de carro. Estar no Terminal 3 às 23:10.", "av": "Transfer ainda não reservado. O check-out formal é 02/12 até 12:00, então o quarto é seu a noite toda."}]}, {"d": "02", "m": "dez", "sem": "Qua", "c": "São Paulo → Doha", "r": "Voo de madrugada e escala em Doha", "i": [{"h": "02:10", "k": "voo", "g": "Qatar Airways · WY 6128", "t": "Guarulhos → Doha", "x": "Terminal 3. Chega Doha 21:40. Qsuite, assento 5K. A350-1000.", "cod": "9TNDDB", "cl": "Reserva Qatar", "av": "Check-in abre às 02:10 do dia 30, ainda em Curitiba. Faça pelo celular só para emitir o cartão de embarque."}, {"h": "21:40", "k": "livre", "g": "Escala de 10h25", "t": "Noite no Hamad", "x": "Tudo abre 24 horas. Al Safwa, a sala de primeira da Qatar, à qual seu QR 1006 dá acesso: quartos de descanso, chuveiro e restaurante à la carte. Se quiser sair da sala: Emporio Armani Ristorante no Concourse B, o melhor café do aeroporto. Harrods Tea Room no duty free, para a sambousa de zaatar e as batatas trufadas. Basta, no Concourse C, para comida catariana de verdade: majboos e chá karak. Fendi Caffè fica dentro do jardim The Orchard, no meio do terminal, e é o lugar mais agradável para passar a madrugada.", "av": "Peça hotel de trânsito à Qatar antes de pagar. Se não conseguir, o Oryx Garden Hotel fica no fim do Concourse C, dentro da área de trânsito, com academia e chuveiro. Voando Qatar você costuma ter voucher de refeição de US$ 20 por pessoa: pergunte no balcão de conexão."}]}, {"d": "03", "m": "dez", "sem": "Qui", "c": "Doha → Dubai", "r": "Voo direto em primeira classe. Fim da viagem", "i": [{"h": "08:05", "k": "voo", "g": "Qatar Airways · QR 1006", "t": "Doha → Dubai", "x": "Chega 10:25, Terminal 1. Primeira classe, 2 peças de bagagem.", "cod": "GCWJDN · 9TNDDB", "cl": "Localizadores", "av": "Reemissão sem custo depois da alteração de horário. O trecho por Mascate saiu do bilhete e você chega quase 6h antes do que a mudança tinha imposto."}]}]};
-const D = DADOS.D, PEND = DADOS.PEND;
-const ROT = {voo:'Voo',onibus:'Ônibus',hotel:'Hospedagem',passeio:'Passeio',jantar:'Refeição',livre:'Tempo livre',via:'Trajeto',festa:'Família'};
-const esc = s => String(s??'').replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const DADOS={"PEND": [{"n": "Outubro", "t": "Museu do Ipiranga · 01/12", "p": "Entrada por horário marcado. Monitorar a abertura do calendário em meados de outubro."}, {"n": "Outubro", "t": "Confirmar local e horário do ENADE · 29/11", "p": "O cartão de confirmação sai antes da prova. Cheque o endereço e o horário de fechamento dos portões, e avise a mãe onde encontrar você depois."}, {"n": "Agora", "t": "Código da reserva do Novotel Curitiba", "p": "O hotel mudou do Pestana para o Novotel, na Rua Doutor Pedrosa 288. Preencha o código nos dias 24 e 29 e avise a Serra Verde Express do novo endereço do apanhe da Litorina."}, {"n": "Agora", "t": "Chão Batido abre na segunda? · 23/11", "p": "O jantar do dia 23 é em Santo Antônio de Lisboa, depois do pôr do sol. Confirme por telefone que a casa abre segunda antes de contar com ela."}, {"n": "Novembro", "t": "Transfer Sooz → GRU · noite de 01/12", "p": "Voo 02:10. Sair do hotel 22:30, estar no aeroporto às 23:10."}, {"n": "Novembro", "t": "Reservar os jantares que enchem", "p": "El Señor Asador no sábado 21 e Chão Batido na segunda 23, em Florianópolis. Ibérico e Taco El Pancho em Curitiba. Graça Mineira em São Paulo. Por telefone ou WhatsApp, uma semana antes."}, {"n": "Feito", "t": "Seguro da mãe · dia na Argentina", "p": "Contratado só para a travessia de 18/11, que é onde ele é exigido. Cobertura doméstica fica por conta do convênio dela."}], "D": [{"d": "11", "m": "nov", "sem": "Qua", "c": "Dubai → Doha", "r": "Dois voos e uma espera longa em Doha", "i": [{"h": "11:00", "k": "voo", "g": "Oman Air · WY 604", "t": "Dubai → Muscat", "x": "Terminal 1. Chega 12:10. Executiva, assento 03A. 2 peças de bagagem.", "cod": "GCWJDN", "cl": "Localizador"}, {"mv": "2h40|Conexão|Sem sair do terminal de Muscat|12:10"}, {"h": "14:50", "k": "voo", "g": "Oman Air · WY 663", "t": "Muscat → Doha", "x": "Chega 15:30. Conexão de 2h40 em Muscat.", "cod": "GCWJDN", "cl": "Localizador"}, {"mv": "10 min|A pé|Portão de chegada → Lounge Al Mourjan|15:20"}, {"h": "15:30", "k": "livre", "g": "Cerca de 10h", "t": "Espera em Doha", "x": "Lounge Al Mourjan pelo acesso da executiva. Pergunte no balcão da Qatar sobre hotel de trânsito.", "av": "Brasileiro entra no Catar sem visto. Dá tempo de jantar na cidade se preferir sair."}]}, {"d": "12", "m": "nov", "sem": "Qui", "c": "Doha → São Paulo", "r": "Chegada, Mercadão e ônibus noturno para Lins", "i": [{"h": "01:35", "k": "voo", "g": "Qatar Airways · WY 6029", "t": "Doha → Guarulhos", "x": "Chega 10:40 no Terminal 3. Qsuite, assento 5K.", "cod": "9TNDDB", "cl": "Reserva Qatar"}, {"h": "11:30", "k": "via", "g": "Transfer · 50 min", "t": "GRU Terminal 3 → ibis, na República", "x": "Já reservado. Chegada por volta das 12:20. Deixe as malas no hotel antes de sair.", "cod": "424878405", "cl": "Booking"}, {"mv": "15 min|Uber|ibis → Mercadão|12:25"}, {"h": "12:40", "k": "passeio", "g": "2h", "t": "Mercado Municipal", "x": "Almoce lá: sanduíche de mortadela no mezanino, no Hocca Bar ou no Bar do Mané, e pastel de bacalhau no Hocca. Depois desça e ande pelos boxes de frutas, que dão prova.", "av": "Fecha às 18:00. Leve algum dinheiro, parte dos boxes ainda prefere espécie."}, {"mv": "15 min|Uber|Mercadão → ibis|14:45"}, {"h": "15:00", "k": "hotel", "g": "Check-in", "t": "ibis budget SP Centro São João", "x": "Av. São João 1140, Centro. Check-in até 23:30. Sem café da manhã.", "cod": "6443.654.205 · PIN 2219", "cl": "Reserva"}, {"h": "19:30", "k": "jantar", "t": "Restaurante do ibis budget", "x": "Jantar no próprio hotel antes de sair. Evita procurar lugar no centro à noite carregando mala."}, {"mv": "20 min|Uber|Hotel → Terminal Barra Funda|21:00"}, {"h": "22:15", "k": "onibus", "g": "Reunidas", "t": "Barra Funda → Lins", "x": "Leito cama, poltrona 55, plataforma 10. Chegue por volta das 21:20, com folga.", "cod": "010323567770", "cl": "Bilhete"}]}, {"d": "13", "m": "nov", "sem": "Sex", "c": "Lins", "r": "Chegada de madrugada e dia com a família", "i": [{"h": "05:30", "k": "via", "g": "Chegada", "t": "Rodoviária de Lins", "x": "Av. Tiradentes 2401. Sua mãe busca vocês no desembarque."}, {"mv": "15 min|Carro|Rodoviária de Lins → Parque Alto da Boa Vista|05:45"}, {"h": "06:00", "k": "livre", "t": "Casa da família", "x": "Vá direto para a casa da sua mãe. Banho, café e descanso antes de o dia começar."}, {"h": "—", "k": "livre", "g": "Dia inteiro", "t": "Família e cidade", "x": "Dia livre com os irmãos e as crianças. Sem nada marcado."}, {"mv": "10 min|Carro|Casa da família → Cristal Palace|14:50"}, {"h": "15:00", "k": "hotel", "g": "Check-in", "t": "Cristal Palace Hotel", "x": "Rua Luiz Gama 1771. 2 noites, café incluído. Deixe a mala e volte para a família.", "cod": "6314.563.781 · PIN 9867", "cl": "Reserva", "av": "Obra no prédio das 09:00 às 19:00. Como você passa o dia fora, só incomoda se voltar para descansar à tarde."}, {"h": "19:00", "k": "jantar", "t": "Em casa, com a mãe", "x": "Sem restaurante. Ela cozinha."}]}, {"d": "14", "m": "nov", "sem": "Sáb", "c": "Lins", "r": "Dia livre e a festa de 90 anos da vó Maria", "i": [{"h": "—", "k": "livre", "g": "Dia livre", "t": "Sem planos", "x": "Dia aberto com a família. A festa é só à noite."}, {"h": "19:30", "k": "festa", "g": "Compromisso do dia", "t": "Festa de 90 anos da vó Maria", "x": "O único compromisso da viagem com data que não se remarca. A festa tem buffet, então não há jantar marcado.", "av": "Leve a câmera carregada e cartão vazio. É o material mais valioso que você vai trazer da viagem."}]}, {"d": "15", "m": "nov", "sem": "Dom", "c": "Lins → Bauru → Foz", "r": "Manhã com a família e a conexão mais apertada da viagem", "i": [{"h": "08:00", "k": "hotel", "g": "Check-out", "t": "Cristal Palace", "x": "Check-out das 06:00 às 13:00. Saia cedo e deixe as malas na casa da família."}, {"mv": "10 min|Carro|Cristal Palace → Casa da família|08:05"}, {"h": "08:15", "k": "livre", "g": "Manhã e início da tarde", "t": "Livre com a família", "x": "Despedida sem pressa. Faça a refeição principal aqui, porque em Bauru sobra pouco mais de uma hora."}, {"mv": "10 min|Carro|Casa da família → Rodoviária de Lins|14:30"}, {"h": "15:05", "k": "onibus", "g": "Reunidas", "t": "Lins → Bauru", "x": "Executivo. Rafa poltrona 3, mãe poltrona 4. Chega 17:20. Chegue por volta das 14:40.", "cod": "Rafa 010332443574 · Mãe 010332443908", "cl": "Bilhetes"}, {"h": "17:20", "k": "livre", "g": "1h55 até o Garcia", "t": "Bauru", "x": "Sem tempo para sair da rodoviária. Coma algo ali mesmo e fique de olho na plataforma.", "av": "É a folga mais curta do roteiro. Se o Reunidas atrasar muito, o Garcia das 19:15 é o único do dia. Plano B: Hotel Saint Martin, a minutos da rodoviária."}, {"h": "19:15", "k": "onibus", "g": "Viação Garcia", "t": "Bauru → Foz do Iguaçu", "x": "Cabine cama. Rafa poltrona 79, mãe poltrona 80. Linha Ribeirão Preto–Foz do Iguaçu.", "cod": "Rafa 4378632 · Mãe 4378633", "cl": "Bilhetes", "av": "A plataforma não vem impressa no bilhete. Confirme no painel ao chegar em Bauru."}]}, {"d": "16", "m": "nov", "sem": "Seg", "c": "Foz do Iguaçu", "r": "Chegada de ônibus e Itaipu à tarde. Dia curto de propósito", "i": [{"h": "09:25", "k": "via", "g": "Chegada", "t": "Rodoviária de Foz", "x": "Desembarque, retirada das malas do bagageiro e táxi ou app. Conte uns 30 min até estar no carro."}, {"mv": "20 min|Uber|Rodoviária de Foz → Recanto Cataratas|09:55"}, {"h": "10:15", "k": "hotel", "g": "Guarda-volumes", "t": "Recanto Cataratas Thermas Resort", "x": "Av. Costa e Silva 3500. Check-in só às 15:00. Deixe as malas, use as piscinas termais e almoce ali antes de Itaipu.", "cod": "5712.155.290 · PIN 6847", "cl": "Reserva"}, {"mv": "25 min|Uber|Recanto Cataratas → Itaipu|14:05"}, {"h": "14:30", "k": "passeio", "t": "Itaipu Special Tour", "x": "Av. Tancredo Neves 6702. Visita às 15:00, chegue 30 min antes.", "cod": "LB28862517", "cl": "Ingresso", "av": "Nenhum tipo de bolsa é permitido, armário custa R$ 10. Calçado fechado sem salto. Documento com foto. Drones proibidos."}, {"mv": "20 min|Uber|Itaipu → Monjolo|19:40"}, {"h": "20:00", "k": "jantar", "g": "Jantar decidido", "t": "Baru Gastronomia", "x": "Av. Paraná 3515, Monjolo. Contemporânea, porções generosas. Aberto das 07:00 à meia-noite, todos os dias.", "cod": "+55 45 99112-5003", "cl": "Telefone"}]}, {"d": "17", "m": "nov", "sem": "Ter", "c": "Foz do Iguaçu", "r": "Manhã livre, Parque das Aves e o pôr do sol", "i": [{"h": "09:00", "k": "livre", "g": "Manhã livre", "t": "Descanso no Recanto", "x": "Termas, piscina e café sem pressa. O dia só começa de verdade às 13:00."}, {"mv": "20 min|Uber|Recanto Cataratas → Parque das Aves|12:40"}, {"h": "13:00", "k": "passeio", "g": "3h", "t": "Parque das Aves", "x": "Entrada válida das 08:30 às 16:30. Fica em frente ao Parque Nacional.", "cod": "LB28862797", "cl": "Ingresso"}, {"mv": "5 min|A pé|Parque das Aves → Centro de Visitantes|16:25"}, {"h": "16:30", "k": "passeio", "t": "Pôr do Sol nas Cataratas", "x": "Embarque no Centro de Visitantes às 17:00 ou 17:30. Desembarque no Espaço Naipi dá acesso aos elevadores da Garganta do Diabo sem trilha. Brinde com espumante incluso.", "cod": "LB30619681", "cl": "Ingresso", "av": "Retire a pulseira antes, na Sala de Turismo do Centro de Visitantes. Acontece com qualquer clima."}, {"mv": "20 min|Uber|Espaço Naipi → Recanto Cataratas|19:40"}, {"h": "20:00", "k": "jantar", "t": "No Recanto Cataratas", "x": "Sem sair de novo. Vocês voltam do pôr do sol já tarde e o restaurante do resort resolve."}]}, {"d": "18", "m": "nov", "sem": "Qua", "c": "Foz → Argentina", "r": "Lado argentino das cataratas. Dia de passaporte", "i": [{"h": "—", "k": "passeio", "g": "Dia inteiro", "t": "Cataratas Argentinas", "x": "Transporte compartilhado, ingresso e taxa de turismo inclusos. O almoço não está incluso: coma nos restaurantes do parque ou leve lanche, porque o dia inteiro é dentro dele.", "cod": "Venda 190815", "cl": "Reserva", "av": "Leve o passaporte e uma cópia do documento da mãe. O horário do apanhe é informado depois das 18:30 do dia anterior. Pós-venda +55 45 99134-1079."}, {"mv": "40 min|Van|Puerto Iguazú → Recanto Cataratas|17:50"}, {"h": "18:30", "k": "via", "g": "Volta", "t": "Chegada ao Recanto", "x": "Horário aproximado. Dia inteiro em pé, com travessia de fronteira nos dois sentidos."}, {"h": "20:00", "k": "jantar", "g": "Decidir no dia", "t": "No Recanto ou TropCalia", "x": "Se vocês voltarem da Argentina depois das 18:30, jantem no resort mesmo. Se chegarem cedo e com disposição, o TropCalia fica a 15 min e vai até 23:30.", "cod": "+55 45 99809-0120", "cl": "TropCalia"}]}, {"d": "19", "m": "nov", "sem": "Qui", "c": "Foz → Florianópolis", "r": "Amanhecer nas cataratas, termas e ônibus noturno", "i": [{"mv": "20 min|Uber|Recanto Cataratas → Parque Nacional|04:40"}, {"h": "05:00", "k": "passeio", "g": "Madrugada", "t": "Amanhecer nas Cataratas com café", "x": "Entrada no parque brasileiro antes da abertura ao público. Café no Porto Canoas.", "cod": "Venda 190815", "cl": "Reserva", "av": "De madrugada há pouco carro rodando. Peça o Uber com antecedência ou combine o táxi na recepção do Recanto na noite anterior."}, {"mv": "25 min|Uber|Parque Nacional → Recanto Cataratas|11:35"}, {"h": "12:00", "k": "hotel", "g": "Check-out", "t": "Recanto Cataratas", "x": "Deixe as malas na bagageira até a hora do ônibus."}, {"h": "14:00", "k": "livre", "g": "Tarde", "t": "Termas do Recanto", "x": "Lado brasileiro já visto no amanhecer e no pôr do sol. A tarde fica para as piscinas termais antes do ônibus."}, {"mv": "20 min|Uber|Recanto Cataratas → Rodoviária de Foz|17:20"}, {"h": "18:15", "k": "onibus", "g": "Catarinense", "t": "Foz → Florianópolis", "x": "Embarque das 18:15 às 18:44, saída 18:45. Leito cama, poltronas 61 e 62. Chegue por volta das 17:40.", "cod": "Rafa BPE 7012154 · Mãe BPE 7012153", "cl": "Bilhetes"}]}, {"d": "20", "m": "nov", "sem": "Sex", "c": "Florianópolis", "r": "Chegada, centro histórico e ponte no fim da tarde", "i": [{"h": "11:00", "k": "via", "g": "Chegada", "t": "Rodoviária de Florianópolis", "x": "Carro até o Novotel, cerca de 15 min."}, {"mv": "15 min|Uber|Rodoviária de Floripa → Novotel|11:15"}, {"h": "11:30", "k": "hotel", "g": "Guarda-volumes", "t": "Novotel Florianópolis", "x": "Av. Rubens Arruda Ramos 2034, Beira Mar Norte. Deixe as malas, o quarto sai às 15:00.", "cod": "6172.585.897 · PIN 3972", "cl": "Reserva", "av": "Peça early check-in no balcão. Se houver quarto livre, a rede Accor costuma liberar sem cobrar."}, {"mv": "10 min|Uber|Novotel → Mercado Público|11:50"}, {"h": "12:00", "k": "passeio", "g": "1h30", "t": "Mercado Público", "x": "Almoço ali mesmo, logo na chegada."}, {"mv": "3 min|A pé|Mercado Público → Praça XV|13:42"}, {"h": "13:45", "k": "passeio", "g": "1h", "t": "Praça XV e Catedral", "x": "A figueira centenária da praça e a catedral ficam lado a lado. Passeio curto e sombreado."}, {"mv": "20 min|A pé|Praça XV → mirante da ponte|14:40"}, {"h": "15:00", "k": "passeio", "g": "1h30", "t": "Ponte Hercílio Luz", "x": "Fica perto do centro, então aproveite que vocês já estão aqui em vez de voltar depois. O mirante do lado da ilha é o melhor ângulo.", "av": "Se alguém estiver cansado, pegue Uber. São 8 min da praça."}, {"mv": "10 min|Uber|Mirante da ponte → Novotel|16:50"}, {"h": "17:00", "k": "hotel", "g": "Check-in", "t": "Novotel Florianópolis", "x": "Quatro noites, 2 camas de solteiro, café incluído. Banho e descanso antes do jantar."}, {"mv": "10 min|Uber|Novotel → Praça Getúlio Vargas|19:50"}, {"h": "20:00", "k": "jantar", "g": "Jantar decidido", "t": "Los Troncos Parrilla", "x": "Praça Getúlio Vargas 158, Centro. Parrilla uruguaia, carne no ponto certo. Sexta até 23:00. Reserve, costuma lotar.", "cod": "+55 48 99205-3743", "cl": "Telefone"}]}, {"d": "21", "m": "nov", "sem": "Sáb", "c": "Florianópolis", "r": "Costa da Lagoa de barco, o vilarejo sem carros", "i": [{"mv": "25 min|Uber|Novotel → Lagoa da Conceição|09:00"}, {"h": "09:25", "k": "via", "g": "Embarque", "t": "Centrinho da Lagoa da Conceição", "x": "O embarque da Cooperbarco fica na Rua Sen. Ivo D'Aquino 2, na beira da lagoa.", "av": "A Cooperbarco só aceita pix, débito ou dinheiro. Cartão de crédito não passa."}, {"h": "09:45", "k": "passeio", "g": "Barco · 30 min", "t": "Travessia até a Costa da Lagoa", "x": "Barco da Cooperbarco atravessando a Lagoa da Conceição. Sente do lado esquerdo para a vista dos morros."}, {"h": "10:15", "k": "passeio", "g": "4h", "t": "Costa da Lagoa", "x": "Vilarejo sem carro nenhum, só trilha e casas na beira d'água. Caminhe pela margem, sente nos restaurantes sobre a água e almoce lá.", "av": "Terreno plano na beira, mas com degraus nos trapiches. Sapato fechado ajuda. Sábado o vilarejo inteiro funciona, que é a vantagem de ter trocado o dia."}, {"h": "14:30", "k": "passeio", "g": "Barco · 30 min", "t": "Volta para a Lagoa da Conceição", "x": "Confirme o horário do último barco na chegada. Eles rodam das 08:00 às 20:00, mas com intervalos."}, {"mv": "25 min|Uber|Lagoa da Conceição → Novotel|15:05"}, {"h": "15:30", "k": "livre", "g": "Tarde livre", "t": "Volta ao Novotel", "x": "Banho e descanso. O dia inteiro foi na água e o jantar é a cinco minutos a pé."}, {"mv": "5 min|A pé|Novotel → Rua Bocaiúva|19:25"}, {"h": "19:30", "k": "jantar", "g": "Jantar decidido", "t": "El Señor Asador de Brasa", "x": "Rua Bocaiúva 2098, Centro. Carnes na brasa, cordeiro e arroz de pato. Sábado até 23:20, a cinco minutos a pé do hotel.", "cod": "+55 48 3113-2088", "cl": "Telefone"}]}, {"d": "22", "m": "nov", "sem": "Dom", "c": "Florianópolis", "r": "Dia inteiro no norte da ilha, sem travessia", "i": [{"mv": "35 min|Uber|Novotel → Jurerê|09:30"}, {"h": "10:05", "k": "passeio", "g": "2h30", "t": "Praia de Jurerê", "x": "Mar calmo e areia plana, boa para caminhar a orla inteira. A parte tradicional, e não Jurerê Internacional, é mais tranquila num domingo."}, {"mv": "5 min|A pé|Orla → restaurantes da Av. dos Búzios|12:40"}, {"h": "12:45", "k": "jantar", "g": "1h30", "t": "Almoço em Jurerê", "x": "Faça a refeição principal aqui. Tem casa de carne e massa além dos frutos do mar."}, {"mv": "12 min|Uber|Jurerê → Praia Daniela|14:18"}, {"h": "14:30", "k": "passeio", "g": "2h", "t": "Praia Daniela", "x": "A 12 min dali, ainda mais calma e rasa. Boa para sentar à sombra no fim da tarde."}, {"mv": "35 min|Uber|Praia Daniela → Novotel|16:55"}, {"h": "17:30", "k": "livre", "g": "Volta", "t": "Novotel Florianópolis", "x": "Tarde livre. Amanhã é o dia mais longo da ilha, com pôr do sol em Santo Antônio e jantar por lá."}, {"mv": "8 min|Uber|Novotel → Centro|19:52"}, {"h": "20:00", "k": "jantar", "g": "Jantar decidido", "t": "Trattoria Carbone", "x": "Rua Felipe Schmidt 869, Centro. Costela invernale e risoto. Domingo até 23:00, quando quase tudo no centro fecha.", "cod": "+55 48 3054-0731", "cl": "Telefone"}]}, {"d": "23", "m": "nov", "sem": "Seg", "c": "Florianópolis", "r": "Praias do leste e pôr do sol açoriano", "i": [{"mv": "25 min|Uber|Novotel → Praia Mole|09:00"}, {"h": "09:25", "k": "passeio", "g": "2h", "t": "Praia Mole", "x": "Areia clara e morros dos dois lados. Mar forte, é praia de olhar mais do que de entrar.", "av": "Segunda de manhã é o horário mais vazio da semana nas praias do leste."}, {"mv": "10 min|Uber|Praia Mole → Praia da Joaquina|11:25"}, {"h": "11:35", "k": "passeio", "g": "1h15", "t": "Praia da Joaquina", "x": "A 10 min da Mole. Vale pelas dunas e pelo mirante da entrada, mesmo sem descer à areia."}, {"mv": "10 min|Uber|Joaquina → Lagoa da Conceição|12:50"}, {"h": "13:00", "k": "jantar", "g": "1h15", "t": "Almoço na Lagoa", "x": "Parada só para comer, no caminho de volta. As praias não têm boa estrutura de restaurante e a Lagoa fica a 10 min da Joaquina."}, {"mv": "25 min|Uber|Lagoa da Conceição → Novotel|14:15"}, {"h": "14:40", "k": "livre", "g": "2h", "t": "Descanso no Novotel", "x": "Duas horas deitado antes de sair para o pôr do sol. O dia termina tarde e o jantar é longe do hotel."}, {"mv": "25 min|Uber|Novotel → Santo Antônio de Lisboa|16:45"}, {"h": "17:10", "k": "passeio", "g": "2h15", "t": "Santo Antônio de Lisboa", "x": "Vilarejo açoriano com o melhor pôr do sol da ilha. O sol se põe às 18:50 em novembro."}, {"mv": "5 min|A pé|Centrinho de Santo Antônio → restaurante|19:25"}, {"h": "19:30", "k": "jantar", "g": "Jantar decidido", "t": "Restaurante Chão Batido", "x": "Rua Quinze de Novembro 103, Santo Antônio de Lisboa. Frutos do mar com vista da baía, no próprio vilarejo do pôr do sol.", "cod": "+55 48 3235-2186", "cl": "Telefone", "av": "Confirme por telefone se abre na segunda. Se estiver fechado, volte ao centro: a Trattoria Carbone e o Mercado Público ficam a 25 min de Uber daqui."}, {"mv": "25 min|Uber|Santo Antônio de Lisboa → Novotel|21:00"}, {"h": "21:25", "k": "livre", "t": "Última noite em Floripa", "x": "A mala se arruma amanhã de manhã, sem pressa. O check-out é ao meio-dia e o ônibus para Curitiba só sai às 12:45."}]}, {"d": "24", "m": "nov", "sem": "Ter", "c": "Florianópolis → Curitiba", "r": "Cinco horas de estrada, de dia, e chegada ao centro", "i": [{"h": "—", "k": "livre", "g": "Manhã", "t": "Manhã livre na Beira Mar", "x": "Café no hotel, uma última caminhada na orla e a mala fechada com calma. O check-out é só ao meio-dia."}, {"mv": "5 min|A pé|Novotel → restaurantes da orla|10:25"}, {"h": "10:30", "k": "jantar", "g": "1h", "t": "Almoço cedo na Beira Mar", "x": "Coma antes de embarcar. O ônibus sai 12:45 e vocês só chegam em Curitiba às 19:00."}, {"h": "12:00", "k": "hotel", "g": "Check-out", "t": "Novotel Florianópolis", "x": "Check-out no horário. A rodoviária fica a 15 min.", "cod": "6172.585.897 · PIN 3972", "cl": "Reserva"}, {"mv": "15 min|Uber|Novotel → Rodoviária de Florianópolis|12:15"}, {"h": "12:45", "k": "onibus", "g": "Penha", "t": "Florianópolis → Curitiba", "x": "Plataforma VIP Penha. Cama. Rafa poltrona 53, mãe poltrona 52. Chegada por volta das 19:00.", "cod": "Rafa 010335300370 · Mãe 010335300375", "cl": "Bilhetes", "av": "Viagem diurna, cinco horas pela BR-101, a única do roteiro com paisagem. Compre água e algo para comer na rodoviária antes de embarcar."}, {"mv": "12 min|Uber|Rodoferroviária → Novotel, no centro|19:15"}, {"h": "19:30", "k": "hotel", "g": "Check-in", "t": "Novotel Curitiba Batel", "x": "Rua Doutor Pedrosa 288, Centro. Cinco noites, café incluído. Apesar do nome, o hotel fica no centro, a quatro minutos a pé da Rua 24 Horas.", "cod": "a preencher", "cl": "Reserva", "av": "Ponha aqui o código da reserva do Novotel antes de viajar."}, {"mv": "12 min|Uber|Novotel → Rua Bpo. Dom José|20:18"}, {"h": "20:30", "k": "jantar", "g": "Jantar decidido", "t": "Taco El Pancho", "x": "Rua Bpo. Dom José 2293, Batel. Fajitas e tacos com música ao vivo. Terça até 01:00.", "cod": "+55 41 99759-6000", "cl": "Telefone", "av": "Costuma lotar. Reserve por telefone quando chegar em Curitiba."}]}, {"d": "25", "m": "nov", "sem": "Qua", "c": "Curitiba", "r": "Jardim Botânico de manhã, Niemeyer à tarde", "i": [{"h": "—", "k": "livre", "g": "Manhã", "t": "Café da manhã no Novotel", "x": "Café incluído. Saiam por volta das 09:15."}, {"mv": "12 min|Uber|Novotel → Jardim Botânico|09:18"}, {"h": "09:30", "k": "passeio", "g": "2h30", "t": "Jardim Botânico", "x": "Abre às 06:00. A estufa de vidro, o jardim francês e a trilha do bosque."}, {"mv": "12 min|Uber|Jardim Botânico → centro|12:18"}, {"h": "12:30", "k": "jantar", "g": "1h15", "t": "Almoço", "x": "Coma antes do museu."}, {"mv": "8 min|Uber|Almoço → Museu Oscar Niemeyer|13:52"}, {"h": "14:00", "k": "passeio", "g": "2h", "t": "Museu Oscar Niemeyer", "x": "O Olho e o anexo. Fecha às segundas, quarta é dia tranquilo."}, {"mv": "8 min|Uber|Museu Oscar Niemeyer → Novotel|16:22"}, {"h": "16:30", "k": "livre", "g": "Descanso", "t": "Volta ao Novotel", "x": "Banho e uma hora deitado antes do jantar."}, {"mv": "12 min|Uber|Novotel → Água Verde|19:18"}, {"h": "19:30", "k": "jantar", "g": "Jantar decidido", "t": "Restaurante Ibérico", "x": "Av. Água Verde 588. Bacalhau, paella e flamenco em algumas noites. Quarta até 23:00.", "cod": "+55 41 99980-1003", "cl": "Telefone"}]}, {"d": "26", "m": "nov", "sem": "Qui", "c": "Curitiba", "r": "Centro histórico de manhã, Expomotorhome à tarde", "i": [{"mv": "7 min|Uber|Novotel → Mercado Municipal|08:53"}, {"h": "09:00", "k": "passeio", "g": "1h30", "t": "Mercado Municipal de Curitiba", "x": "Abre às 07:00 e fecha segunda. Boxes de frios, café e o setor orgânico. Bom lugar para o café da manhã reforçado."}, {"mv": "8 min|A pé|Mercado Municipal → Rua XV|10:37"}, {"h": "10:45", "k": "passeio", "g": "1h30", "t": "Rua XV e Largo da Ordem", "x": "Calçadão, Boca Maldita e o casario do centro histórico. Tudo a pé, num raio de 15 min."}, {"h": "12:30", "k": "jantar", "g": "1h", "t": "Almoço no centro", "x": "Coma antes de subir para Pinhais. A feira não tem praça de alimentação garantida."}, {"mv": "30 min|Uber|Centro → Expotrade, em Pinhais|13:30"}, {"h": "14:00", "k": "passeio", "g": "6h · até 20:00", "t": "10ª Expomotorhome", "x": "Expotrade Convention Center, Pinhais.", "cod": "Pedido 3387368", "cl": "Ingresso", "av": "Ingresso pessoal e intransferível, documento com foto. Leve fita métrica, fotografe a placa de cada modelo junto com o interior e pergunte a carga útil com os tanques cheios. Saiam por volta das 20:00."}, {"mv": "30 min|Uber|Expotrade, Pinhais → centro|20:00"}, {"h": "20:30", "k": "jantar", "t": "No Novotel", "x": "Vocês voltam da feira tarde e cansados. Coma no hotel e durma.", "av": "Se chegarem antes das 20:00 e com fome de restaurante, o Babilônia fica a 10 min e serve até meia-noite: +55 41 3082-6009."}]}, {"d": "27", "m": "nov", "sem": "Sex", "c": "Curitiba → Morretes", "r": "Litorina Luxo pela Serra do Mar. O passeio do roteiro", "i": [{"h": "07:00", "k": "via", "g": "Apanhe", "t": "Transfer no hotel", "x": "A partir das 07:00. Se não houver apanhe, apresentar 07:30 no Bloco C.", "cod": "Reserva 189865", "cl": "Reserva", "av": "Avise a Serra Verde do novo endereço. O apanhe estava registrado no Pestana, no Batel, e agora é no Novotel, na Rua Doutor Pedrosa 288."}, {"h": "08:30", "k": "passeio", "g": "Serra Verde Express", "t": "Litorina Luxo Copacabana → Morretes", "x": "Vagão 19, poltronas 9 e 10. Almoço com barreado, Hisgeopar e tour em Antonina. Retorno de van às 17:30.", "cod": "88958485 · 88958566", "cl": "Vouchers"}, {"h": "19:30", "k": "jantar", "t": "Leve, no Novotel", "x": "O almoço da Litorina é barreado, prato pesado, e vocês voltam de van às 17:30 cansados. Algo simples no hotel resolve."}]}, {"d": "28", "m": "nov", "sem": "Sáb", "c": "Curitiba", "r": "Tanguá, Ópera de Arame e Barigui, tudo no mesmo arco", "i": [{"mv": "20 min|Uber|Novotel → Parque Tanguá|08:40"}, {"h": "09:00", "k": "passeio", "g": "1h30", "t": "Parque Tanguá", "x": "Mirante sobre a antiga pedreira, cascata e o túnel entre os dois lados. Sábado enche depois das 11:00, chegue cedo."}, {"mv": "15 min|A pé|Parque Tanguá → Ópera de Arame|10:30"}, {"h": "10:45", "k": "passeio", "g": "45 min", "t": "Ópera de Arame", "x": "Fica ao lado do Tanguá, dá para ir a pé em 15 min. Estrutura tubular sobre um lago, visita rápida."}, {"mv": "10 min|Uber|Ópera de Arame → Santa Felicidade|11:50"}, {"h": "12:00", "k": "jantar", "g": "1h30", "t": "Almoço em Santa Felicidade", "x": "Bairro italiano a 10 min da Ópera. Cantinas de rodízio de massa, prato típico de Curitiba."}, {"mv": "10 min|Uber|Santa Felicidade → Parque Barigui|14:20"}, {"h": "14:30", "k": "passeio", "g": "2h", "t": "Parque Barigui", "x": "Capivaras, lago e área de caminhada plana. O parque mais fácil para a mãe andar sem subida."}, {"mv": "15 min|Uber|Parque Barigui → Novotel|16:45"}, {"h": "17:00", "k": "livre", "g": "Descanso", "t": "Volta ao Novotel", "x": "Banho e pausa antes do último jantar com a sua mãe."}, {"mv": "12 min|Uber|Novotel → Água Verde|19:18"}, {"h": "19:30", "k": "jantar", "g": "Jantar decidido", "t": "Barolo Curitiba", "x": "Av. Silva Jardim 2487, Água Verde. Casa tradicional de Curitiba. Sábado das 19:00 à meia-noite. Porções grandes, feitas para dividir, então peça menos do que parece.", "cod": "+55 41 3243-3430", "cl": "Telefone", "av": "Último jantar com a sua mãe. Reserve com antecedência, sábado enche."}]}, {"d": "29", "m": "nov", "sem": "Dom", "c": "Curitiba · ENADE e separação", "r": "Prova à tarde, mãe no shopping, dois ônibus à noite", "i": [{"mv": "6 min|Uber|Novotel → Largo da Ordem|08:54"}, {"h": "09:00", "k": "passeio", "g": "1h30", "t": "Feira do Largo da Ordem", "x": "Só aos domingos, das 09:00 às 14:00. Vá com a mãe antes da prova, dá tempo folgado."}, {"mv": "6 min|Uber|Largo da Ordem → Novotel|10:24"}, {"h": "10:30", "k": "jantar", "g": "30 min", "t": "Almoço cedo, antes da prova", "x": "Coma leve. A prova é longa e você não vai poder sair para comer."}, {"h": "11:00", "k": "via", "g": "Rafa", "t": "Sair para o local do ENADE", "x": "Leve documento com foto e caneta preta.", "av": "Confirme o endereço e o horário de fechamento dos portões no cartão de confirmação. Portão fechado não abre."}, {"h": "11:00", "k": "hotel", "g": "Mãe", "t": "Check-out do Novotel", "x": "Check-out até 12:00. As duas malas ficam no guarda-volumes do hotel.", "cod": "a preencher", "cl": "Reserva"}, {"mv": "8 min|Uber|Novotel → Shopping Estação|11:52"}, {"h": "12:00", "k": "livre", "g": "Mãe · tarde", "t": "Shopping Estação", "x": "Av. Sete de Setembro 2775, a 8 min do hotel. Praça de alimentação, cinema e ar condicionado. Lugar seguro para passar a tarde e almoçar.", "av": "O ponto de espera mudou junto com o hotel. O Shopping Batel ficava ao lado do Pestana, e o Novotel está no centro."}, {"h": "17:30", "k": "via", "g": "Encontro", "t": "Shopping Estação", "x": "Combine um ponto fixo, não só o shopping. A praça de alimentação funciona bem.", "av": "Se a prova terminar depois das 18:00, mude o plano: a mãe pega as malas no Novotel e vai direto para a rodoferroviária, e você a encontra lá."}, {"mv": "8 min|Uber|Shopping Estação → Novotel|18:22"}, {"h": "18:30", "k": "hotel", "g": "Malas", "t": "Buscar as malas no Novotel", "x": "8 min de carro do shopping."}, {"mv": "12 min|Uber|Novotel → Rodoferroviária|19:00"}, {"h": "19:15", "k": "via", "g": "Chegada ao terminal", "t": "Rodoferroviária de Curitiba", "x": "Av. Presidente Affonso Camargo 330. Localize a plataforma 16 antes de qualquer outra coisa."}, {"h": "19:45", "k": "onibus", "g": "Satélite Norte · mãe", "t": "Curitiba → Lins", "x": "Plataforma 16, poltrona 47, leito cama. Linha Goiânia–Florianópolis.", "cod": "010021796905", "cl": "Bilhete", "av": "Combine com seus irmãos quem busca ela na rodoviária de Lins na manhã do dia 30."}, {"h": "20:00", "k": "livre", "g": "3h no terminal", "t": "Jantar e espera na rodoferroviária", "x": "A praça de alimentação fica no piso superior do Bloco Estadual e funciona 24 horas. Estação Rodo é a melhor da casa: prato feito com bife bem servido sai perto de R$ 40 com refrigerante. Express Dom Bolinha fica ao lado, serve o mesmo cardápio e tem café coado na hora por uns R$ 5. O salão tem mesas, sofás e tomadas para carregar o celular.", "av": "Peça o cardápio completo, não só o que estiver na mesa. Há relato de duas versões diferentes, uma com pratos mais caros. Guarda-volumes funciona 24h com pix e cartão. Caixas eletrônicos ficam perto do desembarque."}, {"h": "23:00", "k": "onibus", "g": "Penha · Rafa", "t": "Curitiba → São Paulo", "x": "Portão J, poltrona 35, cama individual. Chega ao Tietê por volta das 05:30. Esteja no portão às 22:40.", "cod": "010323536305", "cl": "Bilhete"}]}, {"d": "30", "m": "nov", "sem": "Seg", "c": "São Paulo", "r": "Manhã de sono, Pinacoteca e tarde livre", "i": [{"h": "05:30", "k": "via", "g": "Chegada", "t": "Rodoviária do Tietê", "x": "Com mala, prefira carro pelo app."}, {"mv": "20 min|Uber|Rodoviária do Tietê → Sooz, na República|05:55"}, {"h": "06:15", "k": "hotel", "g": "Entrada", "t": "Sooz Hotel Collection", "x": "Av. São Luís 234, República. Quarto reservado desde 29/11 para entrar de manhã. Durma até umas 10:00.", "cod": "6800.543.753 · PIN 1786", "cl": "Reserva"}, {"mv": "12 min|Uber|Sooz → Estação da Luz|11:18"}, {"h": "11:30", "k": "passeio", "g": "2h", "t": "Pinacoteca e Parque da Luz", "x": "A Pinacoteca fecha às terças, então hoje é o único dia possível.", "av": "Segunda o Museu do Ipiranga e o MASP estão fechados."}, {"mv": "12 min|Uber|Luz → República|13:33"}, {"h": "13:45", "k": "jantar", "g": "1h", "t": "Almoço perto do hotel", "x": "O centro tem mesa boa e barata a poucos minutos a pé do Sooz."}, {"mv": "12 min|Uber|República → Avenida Paulista|14:50"}, {"h": "15:00", "k": "passeio", "g": "2h30", "t": "Avenida Paulista e Parque Trianon", "x": "Calçadão largo, plano e sombreado no trecho do parque. Boa caminhada de fim de tarde sem subida.", "av": "O MASP fecha às segundas. A caminhada vale do mesmo jeito."}, {"mv": "12 min|Uber|Paulista → Sooz|17:50"}, {"h": "18:00", "k": "livre", "g": "Descanso", "t": "Banho e pausa", "x": "Você acordou às 05:00. Uma hora de sono aqui muda a noite."}, {"h": "20:00", "k": "jantar", "t": "Jantar perto do hotel", "x": "Escolha no dia, a pé. O centro tem opção aberta na segunda a cinco minutos do Sooz."}]}, {"d": "01", "m": "dez", "sem": "Ter", "c": "São Paulo", "r": "Ipiranga, Ibirapuera e saída para o voo", "i": [{"mv": "25 min|Uber|Sooz → Museu do Ipiranga|08:35"}, {"h": "09:00", "k": "passeio", "g": "2h30", "t": "Museu do Ipiranga", "x": "Entrada por horário marcado. O jardim antes do prédio já vale a caminhada.", "av": "Ingresso ainda não comprado. Monitorar o calendário em meados de outubro."}, {"mv": "25 min|Uber|Ipiranga → Centro|12:05"}, {"h": "12:30", "k": "jantar", "g": "1h", "t": "Almoço", "x": "Coma bem. À noite você embarca e só janta no avião de madrugada."}, {"mv": "20 min|Uber|Almoço → Parque Ibirapuera|13:40"}, {"h": "14:00", "k": "passeio", "g": "2h", "t": "Parque Ibirapuera", "x": "Plano, sombreado e enorme. Entre pelo Portão 10, ande até a Marquise e o lago. Se der vontade de museu, o MAC USP fica ali com terraço aberto."}, {"mv": "20 min|Uber|Parque Ibirapuera → Sooz|16:40"}, {"h": "17:00", "k": "hotel", "g": "Antes de sair", "t": "Malas prontas", "x": "Deixe tudo fechado agora. Você volta ao hotel só para pegar e sair.", "av": "O quarto é seu até o embarque, então a tarde pode terminar cedo sem problema."}, {"h": "19:30", "k": "jantar", "t": "Jantar no hotel ou delivery", "x": "Refeição simples antes do aeroporto."}, {"h": "22:30", "k": "via", "g": "Transfer", "t": "Sooz → GRU", "x": "45 min de carro. Estar no Terminal 3 às 23:10.", "av": "Transfer ainda não reservado. O check-out formal é 02/12 até 12:00, então o quarto é seu a noite toda."}]}, {"d": "02", "m": "dez", "sem": "Qua", "c": "São Paulo → Doha", "r": "Voo de madrugada e escala em Doha", "i": [{"h": "02:10", "k": "voo", "g": "Qatar Airways · WY 6128", "t": "Guarulhos → Doha", "x": "Terminal 3. Chega Doha 21:40. Qsuite, assento 5K. A350-1000.", "cod": "9TNDDB", "cl": "Reserva Qatar", "av": "Check-in abre às 02:10 do dia 30, ainda em Curitiba. Faça pelo celular só para emitir o cartão de embarque."}, {"h": "21:40", "k": "livre", "g": "Escala de 10h25", "t": "Noite no Hamad", "x": "Tudo abre 24 horas. Al Safwa, a sala de primeira da Qatar, à qual seu QR 1006 dá acesso: quartos de descanso, chuveiro e restaurante à la carte. Se quiser sair da sala: Emporio Armani Ristorante no Concourse B, o melhor café do aeroporto. Harrods Tea Room no duty free, para a sambousa de zaatar e as batatas trufadas. Basta, no Concourse C, para comida catariana de verdade: majboos e chá karak. Fendi Caffè fica dentro do jardim The Orchard, no meio do terminal, e é o lugar mais agradável para passar a madrugada.", "av": "Peça hotel de trânsito à Qatar antes de pagar. Se não conseguir, o Oryx Garden Hotel fica no fim do Concourse C, dentro da área de trânsito, com academia e chuveiro. Voando Qatar você costuma ter voucher de refeição de US$ 20 por pessoa: pergunte no balcão de conexão."}]}, {"d": "03", "m": "dez", "sem": "Qui", "c": "Doha → Dubai", "r": "Voo direto em primeira classe. Fim da viagem", "i": [{"h": "08:05", "k": "voo", "g": "Qatar Airways · QR 1006", "t": "Doha → Dubai", "x": "Chega 10:25, Terminal 1. Primeira classe, 2 peças de bagagem.", "cod": "GCWJDN · 9TNDDB", "cl": "Localizadores", "av": "Reemissão sem custo depois da alteração de horário. O trecho por Mascate saiu do bilhete e você chega quase 6h antes do que a mudança tinha imposto."}]}]}, D=DADOS.D, PEND=DADOS.PEND;
+const ROT={voo:'Voo',onibus:'Ônibus',hotel:'Hospedagem',passeio:'Passeio',jantar:'Refeição',livre:'Tempo livre',via:'Trajeto',festa:'Família'};
+const HUE={voo:255,onibus:300,hotel:165,passeio:70,jantar:20,livre:250,via:250,festa:330};
+const RH={golfo:60,metropole:255,interior:140,cataratas:190,ilha:225,serra:290};
+const CENA={'11':'golfo','12':'metropole','13':'interior','14':'interior','15':'interior','16':'cataratas','17':'cataratas','18':'cataratas','19':'cataratas','20':'ilha','21':'ilha','22':'ilha','23':'ilha','24':'serra','25':'serra','26':'serra','27':'serra','28':'serra','29':'serra','30':'metropole','01':'metropole','02':'golfo','03':'golfo'};
+const calmo=()=>typeof matchMedia==='function'&&matchMedia('(prefers-reduced-motion:reduce)').matches;
+const esc=s=>String(s??'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const mm=d=>d.m==='dez'?'12':'11';
+const rh=d=>RH[CENA[d.d]]??255;
 
-function item(it){
-  if(it.mv){
-    const p = it.mv.split('|');
-    return `<div class="via"><div class="hora">${esc(p[3]||'')}</div>
-      <div class="corpo"><b>${esc(p[1])} · ${esc(p[0])}</b> · ${esc(p[2])}</div></div>`;
+const SV='<svg viewBox="0 0 24 24">%</svg>';
+const IC={
+ voo:'<path d="M12 2.6c1 0 1.8 1.4 1.8 3.1v2.9l7 4v2l-7-2v4.2l2.3 1.7v1.6L12 19l-4.1 1.1v-1.6l2.3-1.7v-4.2l-7 2v-2l7-4V5.7c0-1.7.8-3.1 1.8-3.1Z"/>',
+ onibus:'<rect x="4.5" y="4" width="15" height="12" rx="2.2"/><path d="M4.5 10.5h15M8.5 16v2.6M15.5 16v2.6"/>',
+ hotel:'<path d="M3 18.5v-7a1.8 1.8 0 0 1 1.8-1.8h9.4A4.8 4.8 0 0 1 19 14.5v4M3 14.6h16M6.4 9.7V6.6h6.8"/>',
+ passeio:'<path d="M12 20.8s6.6-5.5 6.6-10.3A6.6 6.6 0 0 0 5.4 10.5C5.4 15.3 12 20.8 12 20.8Z"/><circle cx="12" cy="10.2" r="2.3"/>',
+ jantar:'<path d="M6.4 3.2v7.4a1.9 1.9 0 0 0 3.8 0V3.2M8.3 10.6v10.2M17.8 3.2c-1.7 1.3-2.5 3.3-2.5 5.5s1 3.4 2.5 3.4v8.7"/>',
+ livre:'<circle cx="12" cy="12" r="3.9"/><path d="M12 3.4v2M12 18.6v2M3.4 12h2M18.6 12h2M6 6l1.4 1.4M16.6 16.6 18 18M18 6l-1.4 1.4M7.4 16.6 6 18"/>',
+ via:'<path d="M4.5 12h14M13.2 6.2 19.5 12l-6.3 5.8"/>',
+ festa:'<path d="M4.5 20.8V12h15v8.8zM4.5 12a1.9 1.9 0 0 1 1.9-1.9h11.2A1.9 1.9 0 0 1 19.5 12M12 10V6.4M12 6.4a1.9 1.9 0 1 0-1.9-1.9A1.9 1.9 0 0 0 12 6.4Z"/>',
+ pe:'<path d="M13.4 4.6a1.4 1.4 0 1 0 0-.1M10.6 20.8 12 16l3 2.4.5 2.4M6 13.8l3.4-2 1-4.4 2.9 2 2.9.5"/>',
+ carro:'<path d="M5 16.4v2.2M19 16.4v2.2M3.2 16.4v-3.2l2-4.1h13.6l2 4.1v3.2z"/><circle cx="7.4" cy="16.4" r="1.1"/><circle cx="16.6" cy="16.4" r="1.1"/>',
+ barco:'<path d="M3 18.2c1.5 1.3 3 1.3 4.5 0s3-1.3 4.5 0 3 1.3 4.5 0 3-1.3 4.5 0M5.2 14.2 6.2 9h11.6l1 5.2M12 9V3.8"/>',
+ alerta:'<path d="M12 4.4 2.9 19.8h18.2zM12 10.2v4.1M12 17.1v.1"/>',
+ seta:'<path d="M9.2 5.6 15.6 12l-6.4 6.4"/>'
+};
+const ico=n=>SV.replace('%',IC[n]||IC.livre);
+const icoVia=m=>/pé/i.test(m)?'pe':/barco/i.test(m)?'barco':/avi|conex/i.test(m)?'voo':/uber|carro|van|transfer|táxi/i.test(m)?'carro':/ônibus|onibus/i.test(m)?'onibus':'via';
+
+/* relógio */
+const ehHora=h=>/^\d{1,2}:\d{2}$/.test(h||'');
+const emMin=h=>ehHora(h)?(+h.split(':')[0])*60+(+h.split(':')[1]):null;
+function durMin(t){
+  if(!t) return null;
+  const s=String(t).toLowerCase();
+  let m=s.match(/(\d+)\s*h\s*(\d{1,2})?/);
+  if(m) return +m[1]*60+(m[2]?+m[2]:0);
+  m=s.match(/(\d+)\s*min/);
+  if(m) return +m[1];
+  return null;
+}
+const PAD={voo:90,onibus:120,hotel:35,passeio:75,jantar:75,livre:60,via:20,festa:150};
+const ESC=.62, VAO_MAX=70, VAO_CORTE=46, ALT_MIN=74;
+
+function planejar(d){
+  const fila=[];
+  d.i.forEach(it=>{
+    if(it.mv){const p=it.mv.split('|');
+      fila.push({tipo:'via',ini:emMin(p[3]),dur:durMin(p[0])||15,p,it});
+    }else{
+      fila.push({tipo:'par',ini:emMin(it.h),dur:durMin(it.g)||PAD[it.k||'livre']||60,it});
+    }});
+  let fim=null;
+  return fila.map(n=>{
+    let vao=null;
+    if(n.ini!=null&&fim!=null){
+      let g=n.ini-fim; if(g<0) g+=1440;
+      if(g>4) vao=g;
+    }
+    if(n.ini!=null) fim=n.ini+n.dur;
+    return {...n,vao};
+  });
+}
+function alturaVao(g){
+  if(g<=VAO_MAX) return Math.round(g*ESC);
+  return VAO_CORTE;
+}
+function rotuloVao(g){
+  const h=Math.floor(g/60), m=g%60;
+  return (h?h+'h':'')+(m?(h?' ':'')+m+' min':'')+' sem compromisso';
+}
+
+function bloco(n){
+  if(n.tipo==='via'){
+    const p=n.p, alt=Math.max(Math.round(n.dur*ESC),34);
+    return `<div class="linha via" style="--alt:${alt}px">
+      <span class="hh">${esc(p[3]||'')}</span><span class="mk">${ico(icoVia(p[1]))}</span>
+      <span><b>${esc(p[1])} · ${esc(p[0])}</b> · ${esc(p[2])}</span></div>`;
   }
-  const k = it.k || 'livre';
-  return `<div class="item">
-    <div class="hora">${esc(it.h||'')}</div>
-    <div class="corpo">
-      <span class="tag" style="background:var(--${k})">${esc(it.g || ROT[k] || '')}</span>
-      <p class="t">${esc(it.t)}</p>
-      ${it.x ? `<p class="x">${esc(it.x)}</p>` : ''}
-      ${it.cod ? `<span class="cod"><b>${esc(it.cl||'Código')}</b>${esc(it.cod)}</span>` : ''}
-      ${it.av ? `<div class="av">${esc(it.av)}</div>` : ''}
-    </div></div>`;
+  const it=n.it, k=it.k||'livre', alt=Math.max(Math.round(n.dur*ESC),ALT_MIN);
+  return `<div class="linha par" style="--h:${HUE[k]??250};--alt:${alt}px">
+    <span class="hh">${esc(it.h&&it.h!=='—'?it.h:'')}</span><span class="mk">${ico(k)}</span>
+    <div class="cx"><div class="rot">${esc(it.g||ROT[k])}</div><h3>${esc(it.t)}</h3>
+      ${it.x?`<p>${esc(it.x)}</p>`:''}
+      ${it.cod?`<div class="cod"><b>${esc(it.cl||'Código')}</b>${esc(it.cod)}</div>`:''}
+      ${it.av?`<div class="av">${ico('alerta')}<div>${esc(it.av)}</div></div>`:''}</div></div>`;
+}
+function anel(pc,tam,cor){
+  const r=(tam-4)/2, c=2*Math.PI*r;
+  return `<svg width="${tam}" height="${tam}" viewBox="0 0 ${tam} ${tam}" aria-hidden="true">
+    <circle cx="${tam/2}" cy="${tam/2}" r="${r}" fill="none" stroke="var(--line2)" stroke-width="3"/>
+    <circle cx="${tam/2}" cy="${tam/2}" r="${r}" fill="none" stroke="${cor}" stroke-width="3"
+      stroke-linecap="round" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-pc)}"
+      transform="rotate(-90 ${tam/2} ${tam/2})"/></svg>`;
 }
 
-function dia(d, n){
-  return `<section class="dia" data-n="${n}">
-    <div class="cabdia">
-      <div class="num">${esc(d.d)}<i>${esc(d.m)}</i></div>
-      <div class="cabtxt">
-        <span class="cidade">${esc(d.c)}</span>
-        <span class="resumo">${esc(d.sem)} · ${esc(d.r)}</span>
-      </div>
+function folha(d,n){
+  const plano=planejar(d);
+  const paradas=plano.filter(x=>x.tipo==='par').length;
+  const vias=plano.length-paradas;
+  const minutos=plano.filter(x=>x.tipo==='via').reduce((a,b)=>a+b.dur,0);
+  const inicio=plano.find(x=>x.ini!=null), ultimo=[...plano].reverse().find(x=>x.ini!=null);
+  const janela=inicio?`${String(Math.floor(inicio.ini/60)).padStart(2,'0')}:${String(inicio.ini%60).padStart(2,'0')} → ${String(Math.floor((ultimo.ini+ultimo.dur)%1440/60)).padStart(2,'0')}:${String((ultimo.ini+ultimo.dur)%60).padStart(2,'0')}`:'dia aberto';
+  const corpo=plano.map(x=>
+    (x.vao?`<div class="linha"><span class="vao${x.vao>VAO_MAX?' corte':''}" style="--alt:${alturaVao(x.vao)}px">${esc(rotuloVao(x.vao))}</span></div>`:'')
+    +bloco(x)).join('');
+  return `<article class="folha" style="--rh:${rh(d)}">
+    <div class="capa" data-n="${esc(d.d)}"><div class="l1">
+      <div class="dt"><b>${esc(d.d)}</b><i>${esc(d.m)} · ${esc(d.sem)}</i></div>
+      <span class="tag">Dia ${n+1} de ${D.length}</span></div>
+      <h2>${esc(d.c)}</h2><p>${esc(d.r)}</p></div>
+    <div class="medidas">
+      <div><b>${paradas}</b><span>paradas</span></div>
+      <div><b>${vias}</b><span>deslocamentos</span></div>
+      <div><b>${Math.floor(minutos/60)}h${String(minutos%60).padStart(2,'0')}</b><span>em trânsito</span></div>
+      <div><b>${janela}</b><span>janela do dia</span></div>
     </div>
-    ${d.i.map(item).join('')}
-  </section>`;
+    <div class="tl">${corpo}</div>
+  </article>`;
 }
 
-let atual = 0;
-function abrir(n){
-  atual = n;
-  document.getElementById('tela').innerHTML = dia(D[n], n);
-  [...document.querySelectorAll('#nav button')].forEach((b,i) =>
-    b.setAttribute('aria-current', i === n ? 'true' : 'false'));
-  const b = document.querySelectorAll('#nav button')[n];
-  if (b) b.scrollIntoView({inline:'center', block:'nearest'});
-  window.scrollTo({top:0});
+let atual=0;
+function pinta(n){
+  atual=n;
+  tela.innerHTML=folha(D[n],n);
+  document.querySelectorAll('.chip').forEach((b,i)=>b.setAttribute('aria-current',i===n?'true':'false'));
+  const c=rol.children[n]; if(c&&c.scrollIntoView) c.scrollIntoView({inline:'center',block:'nearest'});
+  const a=D[n-1], z=D[n+1];
+  passos.innerHTML=
+   `<button type="button" data-ir="${n-1}" ${a?'':'disabled'}><span style="transform:rotate(180deg);display:flex">${ico('seta')}</span><span><b>Anterior</b><em>${a?esc(a.d)+'/'+mm(a)+' · '+esc(a.c):'—'}</em></span></button>`+
+   `<button type="button" class="fim" data-ir="${n+1}" ${z?'':'disabled'}><span><b>Próximo</b><em>${z?esc(z.d)+'/'+mm(z)+' · '+esc(z.c):'—'}</em></span>${ico('seta')}</button>`;
+  anel.innerHTML=anel_svg(n);
+  sub.textContent=`${D[n].c} · dia ${n+1} de ${D.length}`;
+  rota.innerHTML=desenhaRota(n);
+  anima();
+  try{history.replaceState(null,'','#dia-'+D[n].d+'-'+mm(D[n]))}catch(_){}
+}
+const anel_svg=n=>anel((n+1)/D.length,30,`oklch(55% .13 ${rh(D[n])})`);
+function abrir(n,rolar){
+  n=Math.max(0,Math.min(D.length-1,n));
+  if(document.startViewTransition){document.startViewTransition(()=>pinta(n))}else{pinta(n)}
+  if(rolar!==false) scrollTo({top:0,behavior:'instant'});
 }
 
-document.getElementById('nav').innerHTML =
-  D.map((d,i) => `<button type="button" data-i="${i}">${esc(d.d)}/${d.m==='dez'?'12':'11'}</button>`).join('');
-document.getElementById('nav').addEventListener('click', e => {
-  const b = e.target.closest('button');
-  if (b) abrir(+b.dataset.i);
+let grupos=[],ult=null;
+D.forEach((d,i)=>{const c=d.c.split(' →')[0].split(' ·')[0];
+  if(c!==ult){grupos.push({c,ds:[]});ult=c} grupos[grupos.length-1].ds.push(i)});
+const hj=new Date(), ih=D.findIndex(d=>+d.d===hj.getDate()&&(d.m==='nov'?10:11)===hj.getMonth());
+rol.innerHTML=D.map((d,i)=>`<button type="button" class="chip${i===ih?' hoje':''}" data-ir="${i}"
+  style="--rc:oklch(60% .13 ${rh(d)})"><b>${esc(d.d)}/${mm(d)}</b><i>${esc(d.sem)}</i><u></u></button>`).join('');
+
+/* índice e paleta */
+const IX=[];
+D.forEach((d,i)=>{
+  IX.push({i,t:`${d.d}/${mm(d)} · ${d.c}`,s:d.r,d:`${d.d}/${mm(d)}`,b:`${d.d} ${d.c} ${d.r} ${d.sem}`.toLowerCase()});
+  d.i.forEach(it=>{if(it.mv)return;
+    IX.push({i,t:it.t,s:`${d.d}/${mm(d)} · ${d.c}${it.h&&it.h!=='—'?' · '+it.h:''}`,d:it.h&&it.h!=='—'?it.h:'',
+      b:`${it.t} ${it.x||''} ${it.cod||''} ${d.c}`.toLowerCase()})})});
+let sel=0, achados=[];
+function buscar(v){
+  v=(v||'').trim().toLowerCase();
+  achados=v.length<2?IX.filter(x=>x.d.includes('/')).slice(0,23):IX.filter(x=>x.b.includes(v)).slice(0,12);
+  sel=0; desenha();
+}
+function desenha(){
+  saida.innerHTML=achados.length?achados.map((x,j)=>
+    `<button type="button" class="it" data-ir="${x.i}" data-sel="${j===sel?1:0}">
+      <span class="d">${esc(x.d)}</span><span><b>${esc(x.t)}</b><small>${esc(x.s)}</small></span></button>`).join('')
+    :'<div class="vazio">Nada encontrado</div>';
+}
+function abrePal(){ov.classList.add('on');q.value='';buscar('');q.focus()}
+function fechaPal(){ov.classList.remove('on')}
+abrirPal.addEventListener('click',abrePal);
+ov.addEventListener('click',e=>{if(e.target===ov)fechaPal()});
+q.addEventListener('input',e=>buscar(e.target.value));
+q.addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'){e.preventDefault();sel=Math.min(sel+1,achados.length-1);desenha()}
+  if(e.key==='ArrowUp'){e.preventDefault();sel=Math.max(sel-1,0);desenha()}
+  if(e.key==='Enter'&&achados[sel]){abrir(achados[sel].i);fechaPal()}
+  if(e.key==='Escape')fechaPal();
 });
-
-document.getElementById('pend').innerHTML =
-  '<h2>Pendências</h2>' + PEND.map(p => `
-    <div class="p${p.n.toLowerCase()==='feito'?' feito':''}">
-      <div class="q">${esc(p.n)}</div>
-      <div class="r">${esc(p.t)}</div>
-      <div class="s">${esc(p.p)}</div>
-    </div>`).join('');
-
-// abre no dia de hoje, se a viagem estiver acontecendo
-const hoje = new Date();
-const iHoje = D.findIndex(d => +d.d === hoje.getDate() && (d.m === 'nov' ? 10 : 11) === hoje.getMonth());
-abrir(iHoje >= 0 ? iHoje : 0);
-
-window.addEventListener('beforeprint', () => {
-  document.getElementById('tela').innerHTML = D.map(dia).join('');
+addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();abrePal();return}
+  if(e.target===q) return;
+  if(e.key==='Escape')fechaPal();
+  if(e.key==='ArrowRight')abrir(atual+1);
+  if(e.key==='ArrowLeft')abrir(atual-1);
 });
-window.addEventListener('afterprint', () => abrir(atual));
+addEventListener('click',e=>{const b=e.target.closest('[data-ir]');
+  if(b&&!b.disabled){abrir(+b.dataset.ir);fechaPal()}});
+let tx=0,ty=0;
+addEventListener('touchstart',e=>{tx=e.changedTouches[0].clientX;ty=e.changedTouches[0].clientY},{passive:true});
+addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+  if(Math.abs(dx)>80&&Math.abs(dy)<50) abrir(atual+(dx<0?1:-1),false)},{passive:true});
+imp.addEventListener('click',()=>{tela.innerHTML=D.map(folha).join('');print()});
+addEventListener('afterprint',()=>pinta(atual));
+
+/* herói: números que sobem */
+const totItens=D.reduce((a,d)=>a+d.i.filter(x=>!x.mv).length,0);
+const totMin=D.reduce((a,d)=>a+planejar(d).filter(x=>x.tipo==='via').reduce((b,c)=>b+c.dur,0),0);
+const cidades=new Set(D.map(d=>d.c.split(' →')[0].split(' ·')[0]));
+nums.innerHTML=[[D.length,'dias'],[cidades.size,'cidades'],[totItens,'paradas'],
+  [Math.round(totMin/60),'horas em trânsito']].map(([v,r])=>
+  `<div><b data-ate="${v}">0</b><span>${r}</span></div>`).join('');
+const partida=new Date(2026,10,11);
+const dias=Math.ceil((partida-new Date())/864e5);
+faltam.textContent=dias>0?dias+' dias':(dias===0?'hoje':'11 de novembro');
+if(!calmo()){
+  document.querySelectorAll('#nums b').forEach(el=>{
+    const ate=+el.dataset.ate, t0=performance.now(), dur=900;
+    const passo=t=>{const k=Math.min((t-t0)/dur,1), e=1-Math.pow(1-k,3);
+      el.textContent=Math.round(ate*e); if(k<1) requestAnimationFrame(passo)};
+    requestAnimationFrame(passo)});
+}else{document.querySelectorAll('#nums b').forEach(el=>el.textContent=el.dataset.ate)}
+
+/* mapa da rota */
+function desenhaRota(n){
+  const P=52, y0=44, L=D.length, larg=P*(L-1)+120;
+  const pts=D.map((d,i)=>[60+i*P, y0+Math.sin(i*.78)*11]);
+  const cam=pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const feito=pts.slice(0,n+1).map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
+  const nome=i=>D[i].c.split(' →')[0].split(' ·')[0];
+  let cid='',ult=null;
+  D.forEach((d,i)=>{const c=nome(i);
+    if(c!==ult){cid+=`<text class="cid${c===nome(n)?' at':''}" x="${pts[i][0]-4}" y="100">${esc(c)}</text>`;ult=c}});
+  return `<svg viewBox="0 0 ${larg} 120" preserveAspectRatio="xMinYMid meet" role="img" aria-label="Rota da viagem">
+    <path class="fio" d="${cam}"/>
+    <path class="fio feito" style="--L:${P*L*1.3}" d="${feito}"/>
+    ${D.map((d,i)=>`<g class="no${i===n?' at':''}${i===ih?' hoje':''}" data-ir="${i}" tabindex="0" role="button"
+        aria-label="Dia ${esc(d.d)} de ${mm(d)==='11'?'novembro':'dezembro'}">
+        <circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="5.5"/>
+        <text x="${pts[i][0]}" y="${pts[i][1]-15}">${esc(d.d)}</text></g>`).join('')}
+    ${cid}</svg>`;
+}
+
+/* revelação e paralaxe */
+let io=null;
+function anima(){
+  const alvos=[...document.querySelectorAll('.tl .linha')];
+  if(calmo()||!('IntersectionObserver' in window)){
+    alvos.forEach(a=>a.classList.add('vis')); return;
+  }
+  if(io) io.disconnect();
+  io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){
+      const k=alvos.indexOf(e.target);
+      e.target.style.transitionDelay=Math.min(k,6)*26+'ms';
+      e.target.classList.add('vis'); io.unobserve(e.target);
+    }}),{rootMargin:'0px 0px -8% 0px',threshold:.06});
+  alvos.forEach(a=>io.observe(a));
+}
+let raf=0;
+addEventListener('scroll',()=>{
+  if(raf) return;
+  raf=requestAnimationFrame(()=>{raf=0;
+    const c=document.querySelector('.capa');
+    if(c) c.style.setProperty('--par',Math.round(scrollY*.14)+'px');
+  })},{passive:true});
+
+const alvo=location.hash.match(/^#dia-(\d{2})-(\d{2})$/);
+const iAlvo=alvo?D.findIndex(d=>d.d===alvo[1]&&mm(d)===alvo[2]):-1;
+pinta(iAlvo>=0?iAlvo:(ih>=0?ih:0));
 </script>
 </body>
 </html>
